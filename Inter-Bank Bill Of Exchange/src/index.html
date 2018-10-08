@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Inter-Bank Bill of Exchange platform</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body background = "./background.png">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">One-Stop Letter Of Credit platform</h1>
+          <hr/>
+          <br/>
+        </div>
+      </div>
+      <h1><p id="contractAddress"></p></h1>
+      <form>
+        <h1>Create a Bill of Exchange</h1>
+        <br>
+        Exporter address: <input type = "text" id = "exporter">
+        <br>
+        Importer address: <input type = "text" id = "importer">
+        <br>
+        Shipper adress: <input type = "text" id = "shipper">
+        <br>
+        Shipment Value: <input type = "number" id = "shipment" min = "0"><br>
+        <button class="btn btn-default btn-create" input type = "submit"> Submit </button>
+        <p id="boeCreation"></p>
+        <p id="boeCreatedDetails"></p>
+        <br>
+        <h1>Change Bill of Exchange contract value<br></h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "desiredContract">
+        <br>
+        Set Bill of Exchange value desired
+        <input type = "number" id = "boeValue" min = "0"><br>
+        <button class="btn btn-default btn-set" input type = "submit"> Submit </button>
+        <p id="newBOEValue"></p>
+        <br>
+        <h1>Exercise Bill of Exchange</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "exerciseContract">
+        <button class="btn btn-default btn-exercise" input type = "submit"> Submit </button>
+        <p id="exercisedBOE"></p>
+        <br>
+        <h1>Auction for unexercised Bill of Exchanges</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "auctionContract"><br>
+        Set Bill of Exchange value desired
+        <input type = "number" id = "auctionValue" min = "0"><br>
+        <button class="btn btn-default btn-auction" input type = "submit"> Submit </button>
+        <p id="auctionBOE"></p>
+        <br>
+        <h1>End Auction for unexercised Bill of Exchanges</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "auctionEndContract">
+        <button class="btn btn-default btn-auctionEnd" input type = "submit"> Submit </button>
+        <p id="auctionEndBOE"></p>
+        <br>
+        <h1>Indicate Shipment has arrived</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "shippedContract">
+        <button class="btn btn-default btn-ship" input type = "submit"> Submit </button>
+        <p id="ship"></p>
+        <br>
+        <h1>Certify Certificate of Inspection</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "certifiableContract">
+        <button class="btn btn-default btn-cert" input type = "submit"> Submit </button>
+        <p id="cert"></p>
+        <br>
+        <h1>Retrieve BOE details</h1>
+        Enter Bill of Exchange contract address:
+        <input type = "text" id = "detailsContract">
+        <button class="btn btn-default btn-details" input type = "submit"> Submit </button>
+        <p id = "thisBoeHolder"></p>
+        <p id = "thisBoeValue"></p>
+        <h1>Emergency Stop/Start a Letter of Contract</h1>
+        Enter Letter of Credit contract address: <input type = "text" id = "emergencyContract"><br>
+        <button class="btn btn-default btn-stop" input type = "submit"> STOP! </button>
+        <button class="btn btn-default btn-start" input type = "submit"> Start! </button>
+        <p id = "contractStop"></p>
+        <p id = "contractStart"></p>
+      </form>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
