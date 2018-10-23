@@ -1,438 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Inter-Bank Bill of Exchange platform</title>
 
-<head>
-  <meta charset="utf-8">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
-  <!--
-            manifest.json provides metadata used when your web app is added to the
-            homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-          -->
-  <link rel="manifest" href="/manifest.json">
-  <!--
-            Notice the use of  in the tags above.
-            It will be replaced with the URL of the `public` folder during the build.
-            Only files inside the `public` folder can be referenced from the HTML.
-      
-            Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
-            work correctly both with client-side routing and a non-root public URL.
-            Learn how to configure a non-root public URL by running `npm run build`.
-          -->
-  <title>React App</title>
-  <style type="text/css">
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    code {
-      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-    }
-
-    .sidenav {
-      height: 100%;
-      width: 200px;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #25383C;
-      overflow-x: hidden;
-      padding-top: 20px;
-    }
-
-    .sidenav a {
-      padding: 6px 6px 6px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-    }
-
-    .sidenav a:hover {
-      color: #f1f1f1;
-    }
-
-    .main {
-      margin-left: 200px;
-      /* Same as the width of the sidenav */
-    }
-
-    @media screen and (max-height: 450px) {
-      .sidenav {
-        padding-top: 15px;
-      }
-      .sidenav a {
-        font-size: 18px;
-      }
-    }
-
-    .picInactive {
-      width: 100px;
-      height: 100px;
-      margin: auto;
-      border: 2px solid #2A3F54;
-      border-radius: 300px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      display: flex;
-      opacity: 0.7;
-      background-color: white;
-      margin-bottom: 20px;
-    }
-
-    .picActive {
-      width: 100px;
-      height: 100px;
-      margin: auto;
-      border: 2px solid #2A3F54;
-      border-radius: 300px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      display: flex;
-      opacity: 1;
-      background-color: white;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      background-color: #4CAF50;
-      /* Green */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-    }
-  </style>
-</head>
-
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <div id="root">
-    <div class="App">
-      <div class="sidenav">
-        <div class="picInactive" id="creatBoeIcon">
-          <input class="image1" type="image" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png"
-            style="width: 90px; height: 90px; margin: auto;">
-        </div>
-        <div class="picInactive" id="acceptLcIcon">
-          <input class="image" type="image" src="https://cdn.moble.com/w/33/8373/file/service-agreement-ft-icon.png" style="width: 90px; height: 90px; margin: auto;">
-        </div>
-        <!-- <div class="picInactive" id="requestInsSellerIcon">
-          <input class="image" type="image" src="https://bots.co.uk/wp-content/uploads/2018/02/delivery-package-opened.png" style="width: 90px; height: 90px; margin: auto;">
-        </div>
-        <div class="picInactive">
-          <input class="image" type="image" src="https://www.onsolve.com/wp-content/uploads/2015/08/Alarm-bell.png" style="width: 90px; height: 90px; margin: auto;">
-        </div>
-        <div class="picInactive">
-          <input class="image" type="image" src="https://cdn.iconscout.com/public/images/icon/premium/png-512/log-out-33d16d287affdb35-512x512.png"
-            style="width: 90px; height: 90px; margin: auto;">
-        </div> -->
-      </div>
-      <div class="main">
-        <div>
-
-          <div>
-            <button class="button" id="importerButton">Importer</button>
-            <button class="button" id="exporterButton">Exporter</button>
-            <button class="button" id="issueBankButton">Issuing Bank</button>
-            <button class="button" id="inspectorButton">Inspector (Seller)</button>
-            <button class="button" id="shipperButton">Shipper</button>
-            <button class="button" id="inspectorBuyerButton">Inspector (Buyer)</button>
-          </div>
-          <!-- <h1 style="border-bottom: 2px solid silver; height: fit-content; text-align: center;">Create New L/C</h1> -->
-          <div id="importerForms">
-
-            <form id="creatBOE">
-              <h1>Apply for Letter of Credit</h1>
-              <br> Exporter address:
-              <input type="text" id="exporter" value="0x93aEBcA905c55f77cbfBb3d844baFB403b7D0c78">
-              <br> Importer address:
-              <input type="text" id="importer" value="0xDb145996a13FB40Cc0d68b4f68D39174ff470267">
-              <br> Shipper address:
-              <input type="text" id="shipper" value="0xafAa0B5D2998c41aE0A849FDB828ee80591a126d">
-              <br> Inspector address requested by importer:
-              <input type="text" id="insExporter" value="0xc24fea1BF2380f60a8291b32729868F26AFC1869">
-              <br> Issuing Bank address:
-              <input type="text" id="issuingBank" value="0x7ccF67d86095A4803816DdF4a0292f03dB421C74">
-              <br> Shipment Value:
-              <input type="number" id="shipment" min="0">
-              <br>
-              <button class="btn btn-default btn-create" input type="submit"> Submit </button>
-              <p id="boeCreation"></p>
-              <p id="boeCreatedDetails"></p>
-              <br>
-            </form>
-
-            <form id="collectAndPayment" style="display: none">
-                <h1> Make Payment Upon receiving the goods</h1>
-                Letter Of Credit Address:
-                <input type="text" id="lcAdd8">
-                <button class="btn btn-default btn-collectAndPayment" input type="submit"> Make Payment </button>
-                <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
-                <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
-                <br>
-              </form>
-
-          </div>
-
-          <div id="issueBankForm" style="display: none">
-            <form id="acceptLc" style="display: none">
-              <h1>Accept Letter of Credit</h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd">
-              <button class="btn btn-default btn-viewDetails" input type="submit">View Details </button>
-              <button class="btn btn-default btn-accept" input type="submit"> Accept </button>
-              <p id="acceptLcConPrice" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="acceptLcExporter" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="acceptLcImporter" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="currentBOE" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="acceptStatus" style="font-family:Noto Sans; font-size:22px; font-color:'green'"></p>
-              <br>
-            </form>
-
-          </div>
-
-          <div id="exporterForm" style="display: none">
-            <form id="inspectRequestSellter" style="display: none">
-              <h1>Request for Inspector (Seller) </h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd1">
-              <br/> Enter the inspector's address:
-              <input type="text" id="inspSeller" value="0x2ee38B65A23329163c1E65a7472006512e04F76C">
-              <br/>
-              <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button>
-              <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
-              <br>
-            </form>
-
-            <form id="requestShipmentForm" style="display: none">
-              <h1>Request for Shipment </h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd3">
-              <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment </button>
-              <p id="requestShipment" style="font-family:Noto Sans; font-size:22px"></p>
-              <br>
-            </form>
-          </div>
-
-          <div id="inspectorSellerForm" style="display: none">
-            <form id="acceptInspectSeller" style="display: none">
-              <h1> Accept Inspection </h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd2">
-              <button class="btn btn-default btn-acceptInspectSeller" input type="submit"> Accept </button>
-              <p id="sellerInspectStatus" style="font-family:Noto Sans; font-size:22px"></p>
-              <br>
-            </form>
-
-            <form id="completeInspectSeller" style="display: none">
-                <h1> Inspection is complete </h1>
-                Letter Of Credit Address:
-                <input type="text" id="lcAdd5">
-                <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
-                <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
-               
-                <br>
-            </form>
-
-          </div>
-
-          <div id="shipperForm" style="display: none">
-              <form id="acceptShipment" style="display: none">
-                  <h1> Accept Shipment </h1>
-                  Letter Of Credit Address:
-                  <input type="text" id="lcAdd4">
-                  <button class="btn btn-default btn-acceptShipment" input type="submit"> Accept Shipment </button>
-                  <p id="shipperShipStatus" style="font-family:Noto Sans; font-size:22px"></p>
-                  <p id="bolHolderAccept" style="font-family:Noto Sans; font-size:22px"></p>
-                  <br>
-                </form>
-
-                <form id="completeShipment" style="display: none">
-                  <h1> Shipment Complete </h1>
-                  Letter Of Credit Address:
-                  <input type="text" id="lcAdd6">
-                  <button class="btn btn-default btn-completeShipment" input type="submit"> Complete </button>
-                  <p id="shipperShipStatusComplete" style="font-family:Noto Sans; font-size:22px"></p>
-                  <br>
-                </form>
-          </div>
-
-          <div id="inspectorBuyerForm" style="display:none">
-              <form id="inspectorBuyerAkw" style="display: none">
-                  <h1> Aknowledge Inspection for Buyer </h1>
-                  Letter Of Credit Address:
-                  <input type="text" id="lcAdd7">
-                  <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
-                  <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
-                  <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
-                  <br>
-                </form>
-
-          </div>
-
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body background = "./background.png">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">One-Stop Letter Of Credit platform</h1>
+          <hr/>
+          <br/>
         </div>
       </div>
-    </div>
-  </div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+      <h1><p id="contractAddress"></p></h1>
+      <form>
+        <h1>Create a Bill of Exchange</h1>
+        <br>
+        Exporter address: <input type = "text" id = "exporter">
+        <br>
+        Importer address: <input type = "text" id = "importer">
+        <br>
+        Shipper address: <input type = "text" id = "shipper">
+        <br>
+        Inspector address requested by importer: <input type = "text" id = "insExporter">
+        <br>
+        Issuing Bank address: <input type = "text" id = "issuingBank">
+        <br>
+        Shipment Value: <input type = "number" id = "shipment" min = "0"><br>
+        <button class="btn btn-default btn-create" input type = "submit"> Submit </button>
+        <p id="boeCreation"></p>
+        <p id="boeCreatedDetails"></p>
+        <br>
+      </form>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  <script src="/static/js/bundle.js"></script>
-  <script src="/static/js/0.chunk.js"></script>
-  <script src="/static/js/main.chunk.js"></script>
-  <script src="/main.df43f04aff54bb7e7562.hot-update.js"></script>
-
-  <div id="extension-is-installed"></div>
-</body>
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/web3.min.js"></script>
-<script src="js/truffle-contract.js"></script>
-<script src="js/app.js"></script>
-</body>
-
-<script type="text/javascript">window.loop11ExtTerritory = true;</script>
-
-<script>
-
-  // side bar javascript
-  $('.picInactive').on('click', function () {
-    $('.picActive').removeClass('picActive').addClass('picInactive');
-    $(this).removeClass('picInactive').addClass('picActive');
-  });
-
-  // Toggle the forms for respective side bar buttons
-  $('#creatBoeIcon').on('click', function () {
-    $('#acceptLc').show();
-    $('#creatBOE').show();
-    $('#inspectRequestSellter').show();
-    $('#acceptInspectSeller').show();
-    $('#requestShipmentForm').hide();
-    $('#acceptShipment').show();
-    $('#completeInspectSeller').hide();
-    $('#completeShipment').hide(); 
-    $('#inspectorBuyerAkw').show();
-    $('#collectAndPayment').hide();
-  });
-
-  $('#acceptLcIcon').on('click', function () {
-    $('#acceptLc').hide();
-    $('#creatBOE').hide();
-    $('#inspectRequestSellter').hide();
-    $('#acceptInspectSeller').hide();
-    $('#requestShipmentForm').show();
-    $('#acceptShipment').hide();
-    $('#completeInspectSeller').show();
-    $('#completeShipment').show();
-    $('#inspectorBuyerAkw').hide();
-    $('#collectAndPayment').show();
-  });
-
-  // $('#requestInsSellerIcon').on('click', function () {
-  //   $('#acceptLc').hide();
-  //   $('#creatBOE').hide();
-  //   $('#inspectRequestSellter').hide();
-  //   $('#acceptInspectSeller').hide();
-  //   $('#requestShipmentForm').hide();
-  //   $('#acceptShipment').hide();
-  //   $('#completeInspectSeller').hide();
-  //   $('#completeShipment').hide();
-  //   $('#inspectorBuyerAkw').hide();
-  //   $('#collectAndPayment').hide();
-  // });
-
-  // user buttons javascript
-
-  $('#importerButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').show();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-    $('#acceptLcIcon').removeClass('picInactive').addClass('picActive');
-    $('#creatBoeIcon').removeClass('picActive').addClass('picInactive');
-  });
-
-  $('#exporterButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').show();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
-
-  $('#issueBankButton').on('click', function () {
-    $('#issueBankForm').show();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
-
-  $('#inspectorButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').show();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
-
-  $('#shipperButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').show();
-    $('#inspectorBuyerForm').hide();
-    $('#acceptShipment').show();
-    $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
-    $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
-    $('#completeShipment').hide();
-  });
-
-  $('#inspectorBuyerButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide(); 
-    $('#inspectorBuyerForm').show();
-    $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
-    $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
-    $('#inspectorBuyerAkw').show();
-  });
-
-
-
-</script>
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
