@@ -35,15 +35,16 @@ App = {
 
     bindEvents: function () {
         $(document).on('click', '.btn-create', App.createBoe);
-        $(document).on('click', '.btn-set', App.setBOE);
-        $(document).on('click', '.btn-exercise', App.exerciseBOE);
-        $(document).on('click', '.btn-auction', App.auction);
-        $(document).on('click', '.btn-auctionEnd', App.auctionEnd);
-        $(document).on('click', 'btn-ship', App.setShip);
-        $(document).on('click', '.btn-cert', App.certify);
-        $(document).on('click','.btn-details',App.getDetails);
-        $(document).on('click','.btn-stop',App.stop);
-        $(document).on('click','.btn-start',App.start);
+        $(document).on('click', '.btn-viewDetails', App.getDetails);
+        $(document).on('click', '.btn-accept', App.issueLetterOfCredit);        
+        $(document).on('click', '.btn-requestInspSeller', App.assignInspectionSeller);
+        $(document).on('click', '.btn-acceptInspectSeller', App.acceptInspectSeller);
+        $(document).on('click', '.btn-requestShipment', App.requestShipment);
+        $(document).on('click', '.btn-acceptShipment', App.acceptShipment);
+        $(document).on('click', '.btn-completeInspectSeller', App.completeInspectSeller);
+        $(document).on('click', '.btn-completeShipment', App.completeShipment);
+        $(document).on('click', '.btn-inspectorBuyerAkw', App.inspectorBuyerAkw);
+        $(document).on('click', '.btn-collectAndPayment', App.collectAndPayment);
     },
 
     createBoe: function(event) {
@@ -53,6 +54,8 @@ App = {
         var importer = document.getElementById("importer").value;
         var exporter = document.getElementById("exporter").value;
         var shipper = document.getElementById("shipper").value;
+        var inspectorForExp=document.getElementById("insExporter").value;
+        var issuingBank=document.getElementById("issuingBank").value;
         var shipmentValue = parseInt(document.getElementById("shipment").value);
         console.log("importer is " + importer)
         console.log("exporter is " + exporter)
@@ -66,10 +69,9 @@ App = {
 
             App.contracts.LetterOfCredit.deployed().then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.createBOE(exporter,importer,shipper,shipmentValue).then(function(){
-                    document.getElementById("contractAddress").innerHTML = "The contract address is " + LetterOfCreditInstance.address;
+                return LetterOfCreditInstance.createBOE(exporter,importer,shipper,inspectorForExp,issuingBank,shipmentValue).then(function(){
                     document.getElementById("boeCreation").innerHTML = "Contract " + LetterOfCreditInstance.address + " successfully updated with value " + shipmentValue;
-                    document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper;
+                    document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper+ "<br> Issuing Bank: " + issuingBank +"<br> Inspector for Buyer" + inspectorForExp;
                 });
             }).catch(function (err) {
                 console.log(err);
@@ -77,12 +79,11 @@ App = {
         });
     },
 
-    setBOE: function(event) {
+    getDetails: function(event) {
         event.preventDefault();
 
         var LetterOfCreditInstance;
-        var value = parseInt(document.getElementById("boeValue").value);
-        var address = document.getElementById("desiredContract").value;
+        var address = document.getElementById("lcAdd").value;
 
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
@@ -91,60 +92,33 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.setBillOfExchangePrice(value).then(function(){
-                    document.getElementById("newBOEValue").innerHTML = address + "'s BOE value changed to " + value;
+                LetterOfCreditInstance.getcontractPrice().then(function(result){
+                    
+                    document.getElementById("acceptLcConPrice").innerHTML = "Contract price: " + result.toNumber();
                 });
-            }).catch(function (err) {
-                console.log(err.message);
-            });
-        });
-    },
-
-    
-    exerciseBOE: function (event) {
-        event.preventDefault();
-        var address = document.getElementById("exerciseContract").value;
-        web3.eth.getAccounts(function (error, accounts) {
-            if (error) {
-                console.log(error);
-            }
-            App.contracts.LetterOfCredit.at(address).then(function (instance) {
-                LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.getBOEPaymentAmt().then(function(result){
-                    return LetterOfCreditInstance.exerciseBillOfExchange({value:result.toNumber()}).then(function(){
-                        document.getElementById("exercisedBOE").innerHTML = address + " successfully exercised!";
+                LetterOfCreditInstance.getExporter().then(function(result){
+                    
+                    document.getElementById("acceptLcExporter").innerHTML =  "Exporter: " + result;
+                });
+                LetterOfCreditInstance.getImporter().then(function(result){
+                    LetterOfCreditInstance.getBOEHolder().then(function(result){
+                        document.getElementById("currentBOE").innerHTML = "BOE holder: " + result;
                     });
+                    
+                    document.getElementById("acceptLcImporter").innerHTML =  "Importer: " + result;
                 });
-
             }).catch(function (err) {
-                console.log(err.message);
+                document.getElementById("acceptLcConPrice").innerHTML=err.message;
             });
         });
     },
 
-    auction: function (event) {
+    issueLetterOfCredit:function(event){
         event.preventDefault();
-        var address = document.getElementById("auctionContract").value;
-        var bid = document.getElementById("auctionValue").value;
-        web3.eth.getAccounts(function (error, accounts) {
-            if (error) {
-                console.log(error);
-            }
 
-            App.contracts.LetterOfCredit.at(address).then(function (instance) {
-                LetterOfCreditInstance = instance; 
-                return LetterOfCreditInstance.unclaimedAuction(bid).then(function(){
-                    document.getElementById("auctionBOE").innerHTML = "Successfully bid " + bid + " amount for " + address;
-                });
-            }).catch(function (err) {
-                console.log(err.message);
-            });
-        });
-    },
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd").value;
 
-    auctionEnd: function (event) {
-        event.preventDefault();
-        var address = document.getElementById("auctionEndContract").value;
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
@@ -152,15 +126,94 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.getWinningBOEPaymentAmt().then(function(res1){
-                    LetterOfCreditInstance.getWinningBOEHolder().then(function(res2){
-                        return LetterOfCreditInstance.endAuction().then(function(){
-                             document.getElementById("auctionEndBOE").innerHTML = "Ending Auction now, winning bid is " + res1 + " by " + res2;
+                LetterOfCreditInstance.issueLetterOfCredit().then(function(){                    
+                    LetterOfCreditInstance.getBOEHolder().then(function(result){
+                        document.getElementById("acceptStatus").innerHTML = "Letter of Credit is issued"+ "\n"+ "BOE holder: " + result;
+                    });                   
+                });
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    assignInspectionSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd1").value;
+        var inspaddress = document.getElementById("inspSeller").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.assignInspectionSeller(inspaddress).then(function(){                    
+                    LetterOfCreditInstance.getinspectorForSeller().then(function(result){
+                        document.getElementById("assignInspSeller").innerHTML = "Inspector for Seller: " + result;
+                        LetterOfCreditInstance.requestInspection().then(function(){                    
+                            LetterOfCreditInstance.getInspectionForExporterStatus().then(function(result){
+                                document.getElementById("inspectionStatusSeller").innerHTML = "Inspection Status: " + result;
+                            });                   
                         });
-                    })
+                    });                   
                 });
                 
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    acceptInspectSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd2").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.acceptInspectionForExporter().then(function(){                    
+                    LetterOfCreditInstance.getInspectionForExporterStatus().then(function(result){
+                        document.getElementById("sellerInspectStatus").innerHTML = "Inspection Status: " + result;
+                    });                   
+                });
                 
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    completeInspectSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd5").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.certifyCertOfInspectionForExporter().then(function(){                    
+                    LetterOfCreditInstance.getcoiFromExporterCertified().then(function(result){
+                        LetterOfCreditInstance.getcoiFromExporterSignature().then(function(result1){
+                            document.getElementById("completeInspectSellerP").innerHTML = "Certificate of Inspection signed?: " + result+  "Signature of Certificate of Inspection (Seller): " + result1;
+                           
+                        }); 
+                    });                   
+                });
                 
             }).catch(function (err) {
                 console.log(err.message);
@@ -168,27 +221,37 @@ App = {
         });
     },
 
-    setShip: function (event) {
+    requestShipment:function(event){
         event.preventDefault();
-        var address = document.getElementById("shippedContract").value
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd3").value;
+
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
             }
+
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.completeShipment().then(function(){
-                    document.getElementById("ship").innerHTML = address + " successfully shipped!";
+                LetterOfCreditInstance.requestForShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("requestShipment").innerHTML = "Shipment Status: " + result;
+                    });                   
                 });
+                
             }).catch(function (err) {
                 console.log(err.message);
             });
         });
     },
 
-    certify: function (event) {
+    acceptShipment:function(event){
         event.preventDefault();
-        var address = document.getElementById("certifiableContract").value;
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd4").value;
+
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
@@ -196,20 +259,27 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.certifyCertOfInspection().then(function(){
-                    document.getElementById("cert").innerHTML = address + " successfully certified and imported!";
+                LetterOfCreditInstance.acceptShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("shipperShipStatus").innerHTML = "Shipment Status: " + result;
+                        LetterOfCreditInstance.getBOLHolder().then(function(result1){
+                            document.getElementById("bolHolderAccept").innerHTML = "Current Bill of Lading Holder: " + result1;
+                        }); 
+                    });                   
                 });
+                
             }).catch(function (err) {
                 console.log(err.message);
             });
         });
     },
 
-    getDetails: function (event) {
+    completeShipment:function(event){
         event.preventDefault();
-        var address = document.getElementById("detailsContract").value;
-        var holder;
-        var value;
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd6").value;
+
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
@@ -217,27 +287,24 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                                
-                LetterOfCreditInstance.getBOEHolder().then(function(result){
-                    console.log(result);
-                    holder = result;
-                    document.getElementById("thisBoeHolder").innerHTML = "BOE Holder: " + holder;
+                LetterOfCreditInstance.completeShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("shipperShipStatusComplete").innerHTML = "Shipment Status: " + result; 
+                    });                   
                 });
-
-                LetterOfCreditInstance.getBOEPaymentAmt().then(function(result){
-                    console.log(result);
-                    value = result;
-                    document.getElementById("thisBoeValue").innerHTML = "BOE Value: " + value;
-                });
-                return;
+                
             }).catch(function (err) {
                 console.log(err.message);
             });
         });
     },
-    stop: function (event) {
+
+    inspectorBuyerAkw:function(event){
         event.preventDefault();
-        var address = document.getElementById("emergencyContract").value;
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd7").value;
+
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
@@ -245,17 +312,27 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.emergencyOperationsStop().then(function(){
-                    document.getElementById("contractStop").innerHTML = address + " successfully frozen!";
+                LetterOfCreditInstance.certifyCertOfInspectionForImporter().then(function(){                    
+                    LetterOfCreditInstance.getcoiFromImporterCertified().then(function(result){
+                        document.getElementById("inspectionBuyerCoi").innerHTML = "COI certified? : " + result; 
+                        LetterOfCreditInstance.getcoiFromImporterSignature().then(function(result){
+                            document.getElementById("inspectionBuyerCoiSig").innerHTML = "COI Signature: " + result; 
+                        });
+                    });                   
                 });
+                
             }).catch(function (err) {
                 console.log(err.message);
             });
         });
     },
-    start: function (event) {
+
+    collectAndPayment:function(event){
         event.preventDefault();
-        var address = document.getElementById("emergencyContract").value;
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd8").value;
+
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
                 console.log(error);
@@ -263,14 +340,20 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.resumeOperations().then(function(){
-                    document.getElementById("contractStart").innerHTML = address + " successfully restarted!";
+                LetterOfCreditInstance.makePayment().then(function(){                    
+                    LetterOfCreditInstance.getBOLHolder().then(function(result){
+                        document.getElementById("bolOwnerCollect").innerHTML = "BOL current Owner : " + result; 
+                        LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                            document.getElementById("bolStatusCollect").innerHTML = "Shipment Status: " + result; 
+                        });
+                    });                   
                 });
+                
             }).catch(function (err) {
                 console.log(err.message);
             });
         });
-    }
+    },
 
 };
 
