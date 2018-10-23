@@ -1,189 +1,202 @@
 pragma solidity ^0.4.24;
-import "./SafeMath.sol";
+
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";//usage of library
 
-
-contract LetterOfCredit is Ownable{
-   
-    using SafeMath for uint256;
-    
+contract LetterOfCredit is Ownable {
     address exporter;
     address importer;
     address shipper;
-    address issuingBank;
-    address inspectorForBuyer;
-    address inspectorForSeller;
     string shipmentStatus; 
-    string inspectionForExporterStatus;
-    string inspectionForImporterStatus;
-    string[] shipmentStatusArray;
-    string[] inspectionForExporterStatusArray;
-    string[] errMsg;
-    uint256 contractPrice;
-    BillOfExchange public boe; 
-    BillOfLading public bol;
-    CertificateOfInspection coiFromExporter;
-    CertificateOfInspection coiFromImporter;
-    
-   /// event PaymentMade(uint paymentAmt, address payer);
-   /// event CertificationDone(bool certified, address sig);
-                                            
+    uint256 shipmentValue;
+    bool auctionStarted;
+    bool auctionFailed;
+    bool emergencyStop;
+
+    BillOfExchange public boe;
+    BillOfExchange public winningBid;
+    CertificateOfInspection coi;
+
+    event BOESet(uint paymentAmt, address exporter);
+    event BOEExercised(address newHolder);
+    event CertificationDone(bool certified, uint date,string status);
+    event BOEFailed(string startAuction);
+    event Alert(string message);
+    event WinningBid(address bidder);
+
     struct BillOfExchange {
         address holder;
-        uint256 contractPrice; 
-    }
-
-    struct BillOfLading {
-        address holder;
+        uint256 paymentAmount; 
     }
 
     struct CertificateOfInspection {
         bool certified;
-        address signature;
+        uint date; 
     }
 
+    modifier normalActivity(){ //circuit breaker condition here
+        require(emergencyStop == false);
+        _;
+    }
+
+    // The Letter of credit should only be instantiated by an exporter.  
+    // In this exercise, we will only be simulating the Bill of Exchange, and Certificate of Inspection functions as smart contracts.
     constructor() public {
     }
 
+//////////////// DO NOT EDIT CODE ABOVE THIS LINE ////////////////
 
-    function createBOE(address exporterAddr, address importerAddr, address shipperAddr, address inspectorAddr, address issuingBankAddr, uint256 contractVal) public {
-        
-        shipmentStatusArray = ["Pending Shipment", "In Port", "Ship out", "Collected"];
-        inspectionForExporterStatusArray=["Requested","Accepted","Rejected"];
+    // Allow the Bill of Exchange Holder to set the value of the bill. 
+    // This may only be performed by the holder of the bill.
 
-        
-        errMsg = [  
-                    "Unauthorised Transaction",                                 //errMsg[0]
-                    "Sent value does not equal Contract Value"                 //errMsg[1]
-                ];
-
-        exporter = exporterAddr; 
+    function (address exporterAddr, address importerAddr, address shipperAddr, uint256 shipmentVal) public {
+        exporter = exporterAddr;
         importer = importerAddr; 
         shipper = shipperAddr;
-        inspectorForBuyer = inspectorAddr;
-        issuingBank=issuingBankAddr;
-
-        contractPrice = SafeMath.mul(contractVal, 1 ether); // Stores ether value as wei 
-        shipmentStatus = "default";
-        inspectionForExporterStatus="default";
-        inspectionForImporterStatus="default";
-
-
-        bol = BillOfLading ({
-            holder: 0
-        });
-        
+        shipmentValue = shipmentVal; 
+        shipmentStatus = "Shipped";
         boe = BillOfExchange({
-            holder: 0,
-            contractPrice: contractVal
+            holder: exporterAddr,
+            paymentAmount: shipmentValue
         });
-        
-        coiFromExporter = CertificateOfInspection({
+
+        coi = CertificateOfInspection({
             certified: false,
-            signature: 0
+            date: 0
         });
-
-        coiFromImporter = CertificateOfInspection({
-            certified: false,
-            signature: 0
-        });
-
     }
 
-    /// Issuing bank issues letter of credit///
-    function issueLetterOfCredit() public payable {
-        require(msg.sender==issuingBank,errMsg[0]);
-        boe.holder = exporter;
+    function emergencyOperationsStop() public onlyOwner{ //circuit breaker
+        emergencyStop = true;
     }
 
-    /// Exporter requests inspection ///
-    function requestInspection() public {
-        require(msg.sender==exporter,errMsg[0]);
-        inspectionForExporterStatus=inspectionForExporterStatusArray[0];
-    }
-    /// Inspector accepts inspection ///
-    function acceptInspectionForExporter() public {
-        require(equal(inspectionForExporterStatus,"Requested"),errMsg[0]);
-        inspectionForExporterStatus=inspectionForExporterStatusArray[1];
-        /// To do: inspectorForSeller = grab from frontend
+    function resumeOperations() public onlyOwner{ //circuit joiner
+        emergencyStop = false;
     }
 
-   /// Inspector for exporter inspects ///
-    function certifyCertOfInspectionForExporter() public {
-        require(equal(inspectionForExporterStatus,"Accepted") && msg.sender==inspectorForSeller,errMsg[0]);
-        coiFromExporter.certified=true;
-        coiFromExporter.signature=msg.sender;
-       
-       /// emit CertificationDone(coiFromExporter.certified,coiFromExporter.signature);
+    function getBOEHolder() public view returns (address holder){
+        return boe.holder;
     }
 
-    /// Exportor requests shipment ///
-    function requestForShipment() public {
-        require(msg.sender==exporter,errMsg[0]);
-        shipmentStatus = shipmentStatusArray[0]; 
-    }
-    
-    /// Shipper accepts shipment and assign exporter to bol holder///
-    function acceptShipment() public {
-        require(equal(shipmentStatus,"Pending Shipment") && msg.sender == shipper,errMsg[0]);
-        shipmentStatus = shipmentStatusArray[1]; 
-        bol.holder=exporter;  
-        
+    function getBOEPaymentAmt() public view returns (uint value){
+        return boe.paymentAmount;
     }
 
-    /// After shipper ship out the goods, changes the goods status to "Ship out". ///
-    function completeShipment() public{
-        require(equal(shipmentStatus,"Ship out") && msg.sender == shipper,errMsg[0]);
-        shipmentStatus = shipmentStatusArray[2];         
+    function getWinningBOEHolder() public view returns (address holder){
+        return winningBid.holder;
     }
 
-
-    /// Inspector for importer inspects ///
-    function certifyCertOfInspectionForImporter() public {
-
-		require(msg.sender==inspectorForBuyer,errMsg[0]);
-    
-        coiFromImporter.certified=true;
-        coiFromImporter.signature=msg.sender;
-     ///   emit CertificationDone(coiFromImporter.certified,coiFromImporter.signature);
+    function getWinningBOEPaymentAmt() public view returns (uint value){
+        return winningBid.paymentAmount;
     }
 
-    /// Importer makes payment
-    function makePayment() public payable{
-           
-        if(importer!=msg.sender){
-            revert(errMsg[0]);
+    function setBillOfExchangePrice(uint256 value) public {
+        require(msg.sender == getBOEHolder());
+        boe.paymentAmount = value; 
+        emit BOESet(boe.paymentAmount,boe.holder);
+    }
+
+    // This function will be performed by anyone seeking finance the Bill of Exchange.
+    // First, the Financier (or msg.sender) will have to perform a transfer of funds to the current Bill Holder.
+    // Next, if payment is successful, the ownership of the Bill of Exchange will be set to the new holder, and the Payment Amount would be set to the new exchange amount. 
+
+    function unclaimedAuction(uint256 value) public normalActivity{
+        // Assume 1 minute firesale auctions if BOE is left unclaimed
+        if (!auctionStarted && auctionFailed){
+            auctionStarted = true;
+            winningBid = BillOfExchange({
+                holder: exporter,
+                paymentAmount: 0
+            });
         }
-        if(boe.contractPrice!=msg.value){
-            revert(errMsg[0]);
-        }     
-      
-        /// pay exporter 93%
-        boe.holder.transfer(SafeMath.div(SafeMath.mul(msg.value,93),100));
-        /// pay inspectorForBuyer 1%
-        inspectorForBuyer.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
-        /// pay inspectorForSeller 1%
-        inspectorForSeller.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
-        /// pay shipper 1%
-        shipper.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
-        /// pay issuing bank 2%
-        issuingBank.transfer(SafeMath.div(SafeMath.mul(msg.value,2),100));
-        /// To do: withdraw function 2% to smart contract
-        bol.holder=msg.sender;
-        shipmentStatus = shipmentStatusArray[3];  
-        ///emit PaymentMade(msg.value, msg.sender);
-    } 
-
-
-    function getBalance() public view returns (uint256) {
-        return address(this).balance;
+        if (value > winningBid.paymentAmount){
+            winningBid = BillOfExchange({
+                holder: msg.sender,
+                paymentAmount: value
+            });
+            emit WinningBid(msg.sender);
+        }
     }
-    
-    function equal(string _a, string _b) public pure returns (bool) {
+
+    function endAuction() public normalActivity{
+        require(msg.sender == getBOEHolder());
+        auctionFailed = false;
+        auctionStarted = false; //reset
+        boe = winningBid;
+    }
+
+    function exerciseBillOfExchange() public normalActivity payable{
+        // Attempt Transfer to BoE Holder
+        if(boe.holder.send(getBOEPaymentAmt())){
+            boe.holder = msg.sender;
+            auctionFailed = false;
+            emit BOEExercised(boe.holder);
+        }
+        else{
+            auctionStarted = false;
+            auctionFailed = true;
+            emit BOEFailed("Starting an Auction for the Bill of Exchange");
+        }
+    }
+
+    // To be performed by the Importer once the goods are In-Port
+    // After inspection is certified by the importer, the importer then transfer the shipmentValue to the current holder of the Bill of Exchange. 
+     
+    function certifyCertOfInspection() public normalActivity payable{
+        require(importer == msg.sender);
+        if(equal(shipmentStatus, "In-Port")){ 
+            coi = CertificateOfInspection({
+                certified: true,
+                date: now
+            });
+            // Attempt Transfer funds to BoE Holder.
+            if(boe.holder.send(shipmentValue)){
+                shipmentStatus = "Collected"; 
+                emit CertificationDone(coi.certified,coi.date,shipmentStatus);
+            }
+            else{
+                emit Alert("sending shipment value failed");
+            }
+        }
+        else{
+            emit Alert("Item is not in port");
+        }
+
+    }
+
+    function compare(string _a, string _b) private returns (int) {
         bytes memory a = bytes(_a);
         bytes memory b = bytes(_b);
-
-        return keccak256(a) == keccak256(b) ;
+        uint minLength = a.length;
+        if (b.length < minLength) minLength = b.length;
+        //@todo unroll the loop into increments of 32 and do full 32 byte comparisons
+        for (uint i = 0; i < minLength; i ++)
+            if (a[i] < b[i])
+                return -1;
+            else if (a[i] > b[i])
+                return 1;
+        if (a.length < b.length)
+            return -1;
+        else if (a.length > b.length)
+            return 1;
+        else
+            return 0;
     }
 
+//////////////// DO NOT EDIT CODE BELOW THIS LINE ////////////////
+
+
+/// Given Functions
+
+    /// @dev Changes the goods status from shipped to "In-Port" once goods are collected. 
+    function completeShipment() public{
+        if(shipper != msg.sender){
+            return;
+        }
+        shipmentStatus = "In-Port";         
+    }
+
+    /// @dev Compares two strings and returns true if they are equal.
+    function equal(string _a, string _b) private returns (bool) {
+        return compare(_a, _b) == 0;
+    }
 }
