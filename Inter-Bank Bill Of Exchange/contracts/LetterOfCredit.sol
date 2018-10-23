@@ -97,13 +97,20 @@ contract LetterOfCredit is Ownable{
     }
 
     /// Exporter requests inspection ///
+    function assignInspectionSeller(address sellerInspector) public {
+        require(msg.sender==exporter,errMsg[0]);
+        inspectorForSeller=sellerInspector;
+    }
+
+    /// Exporter requests inspection ///
     function requestInspection() public {
         require(msg.sender==exporter,errMsg[0]);
         inspectionForExporterStatus=inspectionForExporterStatusArray[0];
     }
+
     /// Inspector accepts inspection ///
     function acceptInspectionForExporter() public {
-        require(equal(inspectionForExporterStatus,"Requested"),errMsg[0]);
+        require(equal(inspectionForExporterStatus,"Requested")&&msg.sender==inspectorForSeller,errMsg[0]);
         inspectionForExporterStatus=inspectionForExporterStatusArray[1];
         /// To do: inspectorForSeller = grab from frontend
     }
@@ -133,7 +140,7 @@ contract LetterOfCredit is Ownable{
 
     /// After shipper ship out the goods, changes the goods status to "Ship out". ///
     function completeShipment() public{
-        require(equal(shipmentStatus,"Ship out") && msg.sender == shipper,errMsg[0]);
+        require(equal(shipmentStatus,"In Port") && msg.sender == shipper,errMsg[0]);
         shipmentStatus = shipmentStatusArray[2];         
     }
 
@@ -185,5 +192,74 @@ contract LetterOfCredit is Ownable{
 
         return keccak256(a) == keccak256(b) ;
     }
+
+    function getcontractPrice() public view returns (uint value){
+        require(msg.sender==issuingBank);
+        return boe.contractPrice;
+    }
+
+    function getExporter() public view returns (address holder){
+        require(msg.sender==issuingBank);
+        return exporter;
+    }
+
+    function getImporter() public view returns (address holder){
+        require(msg.sender==issuingBank);
+        return importer;
+    }
+
+    function getBOEHolder() public view returns (address holder){
+        return boe.holder;
+    }
+
+    function getBOLHolder() public view returns (address holder){
+        return bol.holder;
+    }
+
+    function getinspectorForSeller() public view returns (address holder){
+        return inspectorForSeller;
+    }
+
+    function getissuingBank() public view returns (address holder){
+        return issuingBank;
+    }
+
+    function getinspectorForBuyer() public view returns (address holder){
+        return inspectorForBuyer;
+    }
+
+    function getInspectionForExporterStatus()public view returns (string) {
+        return inspectionForExporterStatus;
+    }
+
+    function getInspectionForImporterStatus() public view returns (string)  {
+        return inspectionForImporterStatus;
+    }
+
+    function getShipmentStatus() public view returns (string)  {
+        return shipmentStatus;
+    }
+
+    function getcoiFromExporterCertified() public view returns (bool)  {
+        return coiFromExporter.certified;
+    }
+
+    function getcoiFromExporterSignature() public view returns (address)  {
+        return coiFromExporter.signature;
+    }
+
+    function getcoiFromImporterCertified() public view returns (bool)  {
+        return coiFromImporter.certified;
+    }
+
+    function getcoiFromImporterSignature() public view returns (address)  {
+        return coiFromImporter.signature;
+    }
+
+
+
+
+
+
 
 }

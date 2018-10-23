@@ -35,15 +35,16 @@ App = {
 
     bindEvents: function () {
         $(document).on('click', '.btn-create', App.createBoe);
-        $(document).on('click', '.btn-set', App.setBOE);
-        $(document).on('click', '.btn-exercise', App.exerciseBOE);
-        $(document).on('click', '.btn-auction', App.auction);
-        $(document).on('click', '.btn-auctionEnd', App.auctionEnd);
-        $(document).on('click', 'btn-ship', App.setShip);
-        $(document).on('click', '.btn-cert', App.certify);
-        $(document).on('click','.btn-details',App.getDetails);
-        $(document).on('click','.btn-stop',App.stop);
-        $(document).on('click','.btn-start',App.start);
+        $(document).on('click', '.btn-viewDetails', App.getDetails);
+        $(document).on('click', '.btn-accept', App.issueLetterOfCredit);        
+        $(document).on('click', '.btn-requestInspSeller', App.assignInspectionSeller);
+        $(document).on('click', '.btn-acceptInspectSeller', App.acceptInspectSeller);
+        $(document).on('click', '.btn-requestShipment', App.requestShipment);
+        $(document).on('click', '.btn-acceptShipment', App.acceptShipment);
+        $(document).on('click', '.btn-completeInspectSeller', App.completeInspectSeller);
+        $(document).on('click', '.btn-completeShipment', App.completeShipment);
+        $(document).on('click', '.btn-inspectorBuyerAkw', App.inspectorBuyerAkw);
+        $(document).on('click', '.btn-collectAndPayment', App.collectAndPayment);
     },
 
     createBoe: function(event) {
@@ -70,13 +71,290 @@ App = {
                 LetterOfCreditInstance = instance;
                 return LetterOfCreditInstance.createBOE(exporter,importer,shipper,inspectorForExp,issuingBank,shipmentValue).then(function(){
                     document.getElementById("boeCreation").innerHTML = "Contract " + LetterOfCreditInstance.address + " successfully updated with value " + shipmentValue;
-                    document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper+ "<br> Issuing Bank: " + issuingBank;
+                    document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper+ "<br> Issuing Bank: " + issuingBank +"<br> Inspector for Buyer" + inspectorForExp;
                 });
             }).catch(function (err) {
                 console.log(err);
             });
         });
     },
+
+    getDetails: function(event) {
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.getcontractPrice().then(function(result){
+                    
+                    document.getElementById("acceptLcConPrice").innerHTML = "Contract price: " + result.toNumber();
+                });
+                LetterOfCreditInstance.getExporter().then(function(result){
+                    
+                    document.getElementById("acceptLcExporter").innerHTML =  "Exporter: " + result;
+                });
+                LetterOfCreditInstance.getImporter().then(function(result){
+                    LetterOfCreditInstance.getBOEHolder().then(function(result){
+                        document.getElementById("currentBOE").innerHTML = "BOE holder: " + result;
+                    });
+                    
+                    document.getElementById("acceptLcImporter").innerHTML =  "Importer: " + result;
+                });
+            }).catch(function (err) {
+                document.getElementById("acceptLcConPrice").innerHTML=err.message;
+            });
+        });
+    },
+
+    issueLetterOfCredit:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.issueLetterOfCredit().then(function(){                    
+                    LetterOfCreditInstance.getBOEHolder().then(function(result){
+                        document.getElementById("acceptStatus").innerHTML = "Letter of Credit is issued"+ "\n"+ "BOE holder: " + result;
+                    });                   
+                });
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    assignInspectionSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd1").value;
+        var inspaddress = document.getElementById("inspSeller").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.assignInspectionSeller(inspaddress).then(function(){                    
+                    LetterOfCreditInstance.getinspectorForSeller().then(function(result){
+                        document.getElementById("assignInspSeller").innerHTML = "Inspector for Seller: " + result;
+                        LetterOfCreditInstance.requestInspection().then(function(){                    
+                            LetterOfCreditInstance.getInspectionForExporterStatus().then(function(result){
+                                document.getElementById("inspectionStatusSeller").innerHTML = "Inspection Status: " + result;
+                            });                   
+                        });
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    acceptInspectSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd2").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.acceptInspectionForExporter().then(function(){                    
+                    LetterOfCreditInstance.getInspectionForExporterStatus().then(function(result){
+                        document.getElementById("sellerInspectStatus").innerHTML = "Inspection Status: " + result;
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    completeInspectSeller:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd5").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.certifyCertOfInspectionForExporter().then(function(){                    
+                    LetterOfCreditInstance.getcoiFromExporterCertified().then(function(result){
+                        LetterOfCreditInstance.getcoiFromExporterSignature().then(function(result1){
+                            document.getElementById("completeInspectSellerP").innerHTML = "Certificate of Inspection signed?: " + result+  "Signature of Certificate of Inspection (Seller): " + result1;
+                           
+                        }); 
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    requestShipment:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd3").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.requestForShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("requestShipment").innerHTML = "Shipment Status: " + result;
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    acceptShipment:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd4").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.acceptShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("shipperShipStatus").innerHTML = "Shipment Status: " + result;
+                        LetterOfCreditInstance.getBOLHolder().then(function(result1){
+                            document.getElementById("bolHolderAccept").innerHTML = "Current Bill of Lading Holder: " + result1;
+                        }); 
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    completeShipment:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd6").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.completeShipment().then(function(){                    
+                    LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                        document.getElementById("shipperShipStatusComplete").innerHTML = "Shipment Status: " + result; 
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    inspectorBuyerAkw:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd7").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.certifyCertOfInspectionForImporter().then(function(){                    
+                    LetterOfCreditInstance.getcoiFromImporterCertified().then(function(result){
+                        document.getElementById("inspectionBuyerCoi").innerHTML = "COI certified? : " + result; 
+                        LetterOfCreditInstance.getcoiFromImporterSignature().then(function(result){
+                            document.getElementById("inspectionBuyerCoiSig").innerHTML = "COI Signature: " + result; 
+                        });
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    collectAndPayment:function(event){
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd8").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.makePayment().then(function(){                    
+                    LetterOfCreditInstance.getBOLHolder().then(function(result){
+                        document.getElementById("bolOwnerCollect").innerHTML = "BOL current Owner : " + result; 
+                        LetterOfCreditInstance.getShipmentStatus().then(function(result){
+                            document.getElementById("bolStatusCollect").innerHTML = "Shipment Status: " + result; 
+                        });
+                    });                   
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
 };
 
 $(function () {
