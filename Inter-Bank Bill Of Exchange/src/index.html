@@ -4,6 +4,10 @@
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
   <!--
@@ -21,6 +25,8 @@
             Learn how to configure a non-root public URL by running `npm run build`.
           -->
   <title>React App</title>
+   <!-- Bootstrap core CSS-->
+  <link href="src/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
     body {
       margin: 0;
@@ -112,6 +118,37 @@
       display: inline-block;
       font-size: 16px;
     }
+
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+
   </style>
 </head>
 
@@ -122,13 +159,48 @@
   <div id="root">
     <div class="App">
       <div class="sidenav">
-        <div class="picInactive" id="creatBoeIcon">
+      <!--  <div class="picInactive" id="creatBoeIcon">
           <input class="image1" type="image" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png"
             style="width: 90px; height: 90px; margin: auto;">
         </div>
         <div class="picInactive" id="acceptLcIcon">
           <input class="image" type="image" src="https://cdn.moble.com/w/33/8373/file/service-agreement-ft-icon.png" style="width: 90px; height: 90px; margin: auto;">
         </div>
+      -->
+      <!--   <div class="picInactive" id="home">
+        <input class="image1" type="image" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png"
+          style="width: 80px; height: 80px; margin: auto;">
+      </div> -->
+
+      <div class="picInactive" id="importer">
+        <input class="image" type="image" src="images/importer.jpg"
+          style="width: 80px; height: 80px; margin: auto;">
+      </div> 
+
+      <div class="picInactive" id="exporter">
+        <input class="image" type="image" src="https://cdn.iconscout.com/public/images/icon/premium/png-512/log-out-33d16d287affdb35-512x512.png"
+          style="width: 80px; height: 80px; margin: auto;">
+      </div> 
+
+      <div class="picInactive" id="shipper">
+        <input class="image" type="image" src="https://bots.co.uk/wp-content/uploads/2018/02/delivery-package-opened.png" style="width: 80px; height: 80px; margin: auto;">
+      </div>
+      
+      <div class="picInactive" id="inspector">
+        <input class="image" type="image" src="https://www.bsu.edu/-/media/www/departmentalcontent/careerservices/myersbriggs/icons/istj.png?h=250&w=250&hash=ED801BA493F9CAAE26D4D06FF14425F8DFD78445&la=en" style="width: 80px; height: 80px; margin: auto;">
+      </div>
+
+      <div class="picInactive" id="issuingBank">
+        <input class="image" type="image" src="http://desafiospublicos.argentina.gob.ar/uploads/Idea/362eb9_bank-building-business-construction-finance-money-3a83d792c48643c6-512x512.png?w=220&height=220&crop-to-fit" style="width: 80px; height: 80px; margin: auto;">
+      </div>
+
+      
+
+
+
+
+
+
         <!-- <div class="picInactive" id="requestInsSellerIcon">
           <input class="image" type="image" src="https://bots.co.uk/wp-content/uploads/2018/02/delivery-package-opened.png" style="width: 90px; height: 90px; margin: auto;">
         </div>
@@ -141,9 +213,9 @@
         </div> -->
       </div>
       <div class="main">
-        <div>
+      
 
-          <div>
+         <!-- <div>
             <button class="button" id="importerButton">Importer</button>
             <button class="button" id="exporterButton">Exporter</button>
             <button class="button" id="issueBankButton">Issuing Bank</button>
@@ -151,31 +223,204 @@
             <button class="button" id="shipperButton">Shipper</button>
             <button class="button" id="inspectorBuyerButton">Inspector (Buyer)</button>
           </div>
+        -->
           <!-- <h1 style="border-bottom: 2px solid silver; height: fit-content; text-align: center;">Create New L/C</h1> -->
-          <div id="importerForms">
+          
+          <!--UI Component-->
+        <div id="overview">
+          <div id="importerUI">
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                 <h4 class="card-title">Importer Application</h4>
+                <div class="card-columns">
+                  <div class="card" id="applyLC">
+                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Apply Letter of Credit</b></h5> 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:95%">
+                     
+                      <div class="card bg-info">
+                        <h5><b>Request Inspection</b></h5> 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
+                      <div class="card bg-info">
+                        <h5><b>Receive Shipment</b></h5> 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
+                      <div class="card bg-info">
+                        <h5><b>Make Payment</b></h5> 
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <form id="creatBOE">
-              <h1>Apply for Letter of Credit</h1>
-              <br> Exporter address:
-              <input type="text" id="exporter" value="0x93aEBcA905c55f77cbfBb3d844baFB403b7D0c78">
-              <br> Importer address:
-              <input type="text" id="importer" value="0xDb145996a13FB40Cc0d68b4f68D39174ff470267">
-              <br> Shipper address:
-              <input type="text" id="shipper" value="0xafAa0B5D2998c41aE0A849FDB828ee80591a126d">
-              <br> Inspector address requested by importer:
-              <input type="text" id="insExporter" value="0xc24fea1BF2380f60a8291b32729868F26AFC1869">
-              <br> Issuing Bank address:
-              <input type="text" id="issuingBank" value="0x7ccF67d86095A4803816DdF4a0292f03dB421C74">
-              <br> Shipment Value:
-              <input type="number" id="shipment" min="0">
-              <br>
-              <button class="btn btn-default btn-create" input type="submit"> Submit </button>
-              <p id="boeCreation"></p>
-              <p id="boeCreatedDetails"></p>
-              <br>
-            </form>
+        <div id="issuingBankUI" style="display: none">
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Issuing Bank Application</h4>
+                  <div class="card-columns">
+                    <div class="card" id="acceptLC">
+                        <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Accept Letter of Credit</b></h5> 
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            <form id="collectAndPayment" style="display: none">
+          <div id="exporterUI" style="display: none">
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Exporter Application</h4>
+                  <div class="card-columns">
+                    <div class="card" id="applyLC">
+                        <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Apply Loan</b></h5> 
+                        </div>
+                    </div>
+                    <div class="card"  id="requestInsSellerIcon">
+                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:95%">
+                        
+                        <div class="card bg-info">
+                          <h5><b>Request Inspection</b></h5> 
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
+                        <div class="card bg-info">
+                          <h5><b>Request for Shipment</b></h5> 
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="shipperUI" style="display: none">
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Shipper Application</h4>
+                  <div class="card-columns">
+                    <div class="card" id="acceptLC">
+                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Accept Shipment</b></h5> 
+                        </div>
+                    </div>
+                    <div class="card" id="acceptLC">
+                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Complete Shipment</b></h5> 
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="inspectorUI" style="display: none">
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Inspector Application</h4>
+                  <div class="card-columns">
+                    <div class="card" id="acceptLC">
+                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Accept Inspection</b></h5> 
+                        </div>
+                    </div>
+                    <div class="card" id="acceptLC">
+                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Complete Inspection</b></h5> 
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--UI Component-->
+
+
+        <div class="details">
+          <div class="container" id="applyLCForm" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Apply New Letter of Credit</h4>
+                    <div class="container">
+                      <form >
+                        <label for="exporter">Exporter Address</label>
+                        <input type="text" id="exporter" value="">
+                        <label for="importer">Importer address</label> 
+                        <input type="text" id="importer" value="">
+                        <label for="shipper">Shipper address</label> 
+                        <input type="text" id="shipper" value="">
+                        <label for="insExporter">Inspector address</label> 
+                        <input type="text" id="insExporter" value="">
+                        <label for="issuingBank">Issuing Bank address</label>
+                        <input type="text" id="issuingBank" value="">
+                        <label for="shipment">Shipment Value</label>
+                        <input type="double" id="shipment" min="0">
+                        <br>
+                        <input type="submit" id="submitLC" value="Submit">
+                        <p id="boeCreation"></p>
+                        <p id="boeCreatedDetails"></p>
+                        <br>
+                    </form> 
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="container" id="inspectRequestSeller" style="display: none">
+              <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Request for Inspector</h4>
+                    <div class="container">
+                      <form>
+                          <label for="lcAdd1">Letter Of Credit Address:</label>
+                          <input type="text" id="lcAdd1">
+                          <label for="inspSeller">Inspector's Address:</label>
+                          <input type="text" id="inspSeller" value="0x2ee38B65A23329163c1E65a7472006512e04F76C">
+                          <br/>
+                          <input type="submit" id="requestInspSeller" value="Submit">
+                          <!-- <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button> -->
+                          <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
+                          <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
+                          <br>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+            </div>
+     
+
+
+            
+
+            <!-- <form id="collectAndPayment" style="display: none">
                 <h1> Make Payment Upon receiving the goods</h1>
                 Letter Of Credit Address:
                 <input type="text" id="lcAdd8">
@@ -183,13 +428,13 @@
                 <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
                 <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
                 <br>
-              </form>
+            </form>
 
-          </div>
+          </div> -->
 
-          <div id="issueBankForm" style="display: none">
+    <!--       <div id="issueBankForm" style="display: none">
             <form id="acceptLc" style="display: none">
-              <h1>Accept Letter of Credit</h1>
+              <h1>Letter of Credit</h1>
               Letter Of Credit Address:
               <input type="text" id="lcAdd">
               <button class="btn btn-default btn-viewDetails" input type="submit">View Details </button>
@@ -202,53 +447,51 @@
               <br>
             </form>
 
-          </div>
+          </div> -->
 
-          <div id="exporterForm" style="display: none">
-            <form id="inspectRequestSellter" style="display: none">
-              <h1>Request for Inspector (Seller) </h1>
+         
+        
+
+    
+        <div class="container" id="requestShipmentForm" style="display: none">
+          <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Request for Shipment</h4>
+                <div class="container">  
+                  <form id="requestShipmentForm" style="display: none">
+                    <label for="lcAdde">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd3">
+                    <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment </button>
+                    <p id="requestShipment" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+        <div id="inspectorSellerForm" style="display: none">
+          <form id="acceptInspectSeller" style="display: none">
+            <h1> Accept Inspection </h1>
+            Letter Of Credit Address:
+            <input type="text" id="lcAdd2">
+            <button class="btn btn-default btn-acceptInspectSeller" input type="submit"> Accept </button>
+            <p id="sellerInspectStatus" style="font-family:Noto Sans; font-size:22px"></p>
+            <br>
+          </form>
+
+          <form id="completeInspectSeller" style="display: none">
+              <h1> Inspection is complete </h1>
               Letter Of Credit Address:
-              <input type="text" id="lcAdd1">
-              <br/> Enter the inspector's address:
-              <input type="text" id="inspSeller" value="0x2ee38B65A23329163c1E65a7472006512e04F76C">
-              <br/>
-              <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button>
-              <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
-              <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
+              <input type="text" id="lcAdd5">
+              <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
+              <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
+              
               <br>
-            </form>
+          </form>
 
-            <form id="requestShipmentForm" style="display: none">
-              <h1>Request for Shipment </h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd3">
-              <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment </button>
-              <p id="requestShipment" style="font-family:Noto Sans; font-size:22px"></p>
-              <br>
-            </form>
-          </div>
-
-          <div id="inspectorSellerForm" style="display: none">
-            <form id="acceptInspectSeller" style="display: none">
-              <h1> Accept Inspection </h1>
-              Letter Of Credit Address:
-              <input type="text" id="lcAdd2">
-              <button class="btn btn-default btn-acceptInspectSeller" input type="submit"> Accept </button>
-              <p id="sellerInspectStatus" style="font-family:Noto Sans; font-size:22px"></p>
-              <br>
-            </form>
-
-            <form id="completeInspectSeller" style="display: none">
-                <h1> Inspection is complete </h1>
-                Letter Of Credit Address:
-                <input type="text" id="lcAdd5">
-                <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
-                <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
-               
-                <br>
-            </form>
-
-          </div>
+        </div>
 
           <div id="shipperForm" style="display: none">
               <form id="acceptShipment" style="display: none">
@@ -327,31 +570,104 @@
   });
 
   // Toggle the forms for respective side bar buttons
-  $('#creatBoeIcon').on('click', function () {
-    $('#acceptLc').show();
-    $('#creatBOE').show();
-    $('#inspectRequestSellter').show();
-    $('#acceptInspectSeller').show();
-    $('#requestShipmentForm').hide();
-    $('#acceptShipment').show();
-    $('#completeInspectSeller').hide();
-    $('#completeShipment').hide(); 
-    $('#inspectorBuyerAkw').show();
-    $('#collectAndPayment').hide();
+  //   $('#creatBoeIcon').on('click', function () {
+  //   $('#acceptLc').show();
+  //   $('#creatBOE').show();
+  //   $('#inspectRequestSellter').show();
+  //   $('#acceptInspectSeller').show();
+  //   $('#requestShipmentForm').hide();
+  //   $('#acceptShipment').show();
+  //   $('#completeInspectSeller').hide();
+  //   $('#completeShipment').hide(); 
+  //   $('#inspectorBuyerAkw').show();
+  //   $('#collectAndPayment').hide();
+  // });
+
+  
+  $('#importer').on('click', function () {
+      $('#overview').show();
+      $('#importerUI').show();
+      $('#exporterUI').hide();
+      $('#issuingBankUI').hide();
+      $('#shipperUI').hide();
+     
+    
+    
+  });
+  $('#exporter').on('click', function () {
+      $('#overview').show();
+      $('#importerUI').hide();
+      $('#exporterUI').show();
+      $('#issuingBankUI').hide();
+      $('#shipperUI').hide();
+      $('#inspectorUI').hide();
+     
+    
+  });
+  $('#issuingBank').on('click', function () {
+      $('#overview').show();
+      $('#importerUI').hide();
+      $('#exporterUI').hide();
+      $('#issuingBankUI').show();
+      $('#shipperUI').hide();
+      $('#inspectorUI').hide();
+    
+    
+  });
+  $('#shipper').on('click', function () {
+      $('#overview').show();
+      $('#importerUI').hide();
+      $('#exporterUI').hide();
+      $('#issingBankUI').hide();
+      $('#shipperUI').show();
+      $('#inspectorUI').hide();
+    
+    
+  });
+  $('#inspector').on('click', function () {
+      $('#overview').show();
+      $('#importerUI').hide();
+      $('#exporterUI').hide();
+      $('#issuingBankUI').hide();
+      $('#shipperUI').hide();
+      $('#inspectorUI').show();
+    
+   
   });
 
-  $('#acceptLcIcon').on('click', function () {
-    $('#acceptLc').hide();
-    $('#creatBOE').hide();
-    $('#inspectRequestSellter').hide();
-    $('#acceptInspectSeller').hide();
-    $('#requestShipmentForm').show();
-    $('#acceptShipment').hide();
-    $('#completeInspectSeller').show();
-    $('#completeShipment').show();
-    $('#inspectorBuyerAkw').hide();
-    $('#collectAndPayment').show();
+  $('#sidenav').on('click', function () {
+    $('#overview').show();
+    $('#details').hide();
   });
+
+  $('#details').on('click', function () {
+    $('#overview').hide();
+  });
+ 
+  $('#applyLC').on('click', function () {
+      $('#applyLCForm').show();
+      $('#overview').hide();
+  });
+
+  $('#requestInsSellerIcon').on('click', function () {
+    $('#inspectRequestSeller').show();
+    $('#overview').hide();
+  });
+
+
+
+//  // $('#acceptLcIcon').on('click', function () {
+//     $('#acceptLc').hide();
+//     $('#creatBOE').hide();
+//     $('#inspectRequestSellter').hide();
+//     $('#acceptInspectSeller').hide();
+//     $('#requestShipmentForm').show();
+//     $('#acceptShipment').hide();
+//     $('#completeInspectSeller').show();
+//     $('#completeShipment').show();
+//     $('#inspectorBuyerAkw').hide();
+//     $('#collectAndPayment').show();
+//   });
 
   // $('#requestInsSellerIcon').on('click', function () {
   //   $('#acceptLc').hide();
