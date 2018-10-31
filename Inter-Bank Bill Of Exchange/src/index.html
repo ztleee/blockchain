@@ -14,7 +14,8 @@
             manifest.json provides metadata used when your web app is added to the
             homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
           -->
-  <link rel="manifest" href="/manifest.json">
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+
   <!--
             Notice the use of  in the tags above.
             It will be replaced with the URL of the `public` folder during the build.
@@ -25,22 +26,24 @@
             Learn how to configure a non-root public URL by running `npm run build`.
           -->
   <title>React App</title>
-   <!-- Bootstrap core CSS-->
-  <link href="src/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS-->
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+
   <style type="text/css">
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     code {
       font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
+        monospace;
     }
 
     .sidenav {
@@ -76,6 +79,7 @@
       .sidenav {
         padding-top: 15px;
       }
+
       .sidenav a {
         font-size: 18px;
       }
@@ -119,7 +123,9 @@
       font-size: 16px;
     }
 
-    input[type=text], select, textarea {
+    input[type=text],
+    select,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -131,24 +137,23 @@
     }
 
     input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
     input[type=submit]:hover {
-        background-color: #45a049;
+      background-color: #45a049;
     }
 
     .container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
     }
-
   </style>
 </head>
 
@@ -158,8 +163,8 @@
   </noscript>
   <div id="root">
     <div class="App">
-      <div class="sidenav">
-      <!--  <div class="picInactive" id="creatBoeIcon">
+      <div class="sidenav" id="sidenav">
+        <!--  <div class="picInactive" id="creatBoeIcon">
           <input class="image1" type="image" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png"
             style="width: 90px; height: 90px; margin: auto;">
         </div>
@@ -167,34 +172,36 @@
           <input class="image" type="image" src="https://cdn.moble.com/w/33/8373/file/service-agreement-ft-icon.png" style="width: 90px; height: 90px; margin: auto;">
         </div>
       -->
-      <!--   <div class="picInactive" id="home">
+        <!--   <div class="picInactive" id="home">
         <input class="image1" type="image" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png"
           style="width: 80px; height: 80px; margin: auto;">
       </div> -->
 
-      <div class="picInactive" id="importer">
-        <input class="image" type="image" src="images/importer.jpg"
-          style="width: 80px; height: 80px; margin: auto;">
-      </div> 
+        <div class="picInactive" id="importerApp">
+          <input class="image" type="image" src="images/importer.jpg" style="width: 80px; height: 80px; margin: auto;">
+        </div>
 
-      <div class="picInactive" id="exporter">
-        <input class="image" type="image" src="https://cdn.iconscout.com/public/images/icon/premium/png-512/log-out-33d16d287affdb35-512x512.png"
-          style="width: 80px; height: 80px; margin: auto;">
-      </div> 
+        <div class="picInactive" id="exporterApp">
+          <input class="image" type="image" src="https://cdn.iconscout.com/public/images/icon/premium/png-512/log-out-33d16d287affdb35-512x512.png"
+            style="width: 80px; height: 80px; margin: auto;">
+        </div>
 
-      <div class="picInactive" id="shipper">
-        <input class="image" type="image" src="https://bots.co.uk/wp-content/uploads/2018/02/delivery-package-opened.png" style="width: 80px; height: 80px; margin: auto;">
-      </div>
-      
-      <div class="picInactive" id="inspector">
-        <input class="image" type="image" src="https://www.bsu.edu/-/media/www/departmentalcontent/careerservices/myersbriggs/icons/istj.png?h=250&w=250&hash=ED801BA493F9CAAE26D4D06FF14425F8DFD78445&la=en" style="width: 80px; height: 80px; margin: auto;">
-      </div>
+        <div class="picInactive" id="shipperApp">
+          <input class="image" type="image" src="https://bots.co.uk/wp-content/uploads/2018/02/delivery-package-opened.png"
+            style="width: 80px; height: 80px; margin: auto;">
+        </div>
 
-      <div class="picInactive" id="issuingBank">
-        <input class="image" type="image" src="http://desafiospublicos.argentina.gob.ar/uploads/Idea/362eb9_bank-building-business-construction-finance-money-3a83d792c48643c6-512x512.png?w=220&height=220&crop-to-fit" style="width: 80px; height: 80px; margin: auto;">
-      </div>
+        <div class="picInactive" id="inspectorApp">
+          <input class="image" type="image" src="https://www.bsu.edu/-/media/www/departmentalcontent/careerservices/myersbriggs/icons/istj.png?h=250&w=250&hash=ED801BA493F9CAAE26D4D06FF14425F8DFD78445&la=en"
+            style="width: 80px; height: 80px; margin: auto;">
+        </div>
 
-      
+        <div class="picInactive" id="issuingBankApp">
+          <input class="image" type="image" src="http://desafiospublicos.argentina.gob.ar/uploads/Idea/362eb9_bank-building-business-construction-finance-money-3a83d792c48643c6-512x512.png?w=220&height=220&crop-to-fit"
+            style="width: 80px; height: 80px; margin: auto;">
+        </div>
+
+
 
 
 
@@ -213,9 +220,9 @@
         </div> -->
       </div>
       <div class="main">
-      
 
-         <!-- <div>
+
+        <!-- <div>
             <button class="button" id="importerButton">Importer</button>
             <button class="button" id="exporterButton">Exporter</button>
             <button class="button" id="issueBankButton">Issuing Bank</button>
@@ -224,58 +231,48 @@
             <button class="button" id="inspectorBuyerButton">Inspector (Buyer)</button>
           </div>
         -->
-          <!-- <h1 style="border-bottom: 2px solid silver; height: fit-content; text-align: center;">Create New L/C</h1> -->
-          
-          <!--UI Component-->
+        <!-- <h1 style="border-bottom: 2px solid silver; height: fit-content; text-align: center;">Create New L/C</h1> -->
+
+        <!--UI Component-->
         <div id="overview">
           <div id="importerUI">
             <div class="container">
               <div class="card">
                 <div class="card-body">
-                 <h4 class="card-title">Importer Application</h4>
-                <div class="card-columns">
-                  <div class="card" id="applyLC">
-                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
+                  <h4 class="card-title">Importer Application</h4>
+                  <div class="card-columns">
+                    <div class="card" id="applyLcIcon">
+                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png"
+                        alt="Avatar" style="width:94%">
                       <div class="card bg-info">
-                        <h5><b>Apply Letter of Credit</b></h5> 
+                        <h5><b>Apply Letter of Credit</b></h5>
                       </div>
-                  </div>
-                  <div class="card">
-                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:95%">
-                     
+                    </div>
+                    <div class="card" id="makePaymentIcon">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
+                        alt="Avatar" style="width:100%">
                       <div class="card bg-info">
-                        <h5><b>Request Inspection</b></h5> 
+                        <h5><b>Collect and Make Payment</b></h5>
                       </div>
-                  </div>
-                  <div class="card">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
-                      <div class="card bg-info">
-                        <h5><b>Receive Shipment</b></h5> 
-                      </div>
-                  </div>
-                  <div class="card">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
-                      <div class="card bg-info">
-                        <h5><b>Make Payment</b></h5> 
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div id="issuingBankUI" style="display: none">
+          <div id="issuingBankUI" style="display: none">
             <div class="container">
-              <div class="card">
+              <div class="card" id="acceptLcIcon">
                 <div class="card-body">
                   <h4 class="card-title">Issuing Bank Application</h4>
                   <div class="card-columns">
                     <div class="card" id="acceptLC">
-                        <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Accept Letter of Credit</b></h5> 
-                        </div>
+                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png"
+                        alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Accept Letter of Credit</b></h5>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -289,24 +286,27 @@
                 <div class="card-body">
                   <h4 class="card-title">Exporter Application</h4>
                   <div class="card-columns">
-                    <div class="card" id="applyLC">
-                        <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Apply Loan</b></h5> 
-                        </div>
+                    <div class="card" id="applyLoanIcon">
+                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png"
+                        alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Apply Loan</b></h5>
+                      </div>
                     </div>
-                    <div class="card"  id="requestInsSellerIcon">
-                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:95%">
-                        
-                        <div class="card bg-info">
-                          <h5><b>Request Inspection</b></h5> 
-                        </div>
+                    <div class="card" id="requestInsSellerIcon">
+                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar"
+                        style="width:95%">
+
+                      <div class="card bg-info">
+                        <h5><b>Request Inspection</b></h5>
+                      </div>
                     </div>
-                    <div class="card">
-                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:100%">
-                        <div class="card bg-info">
-                          <h5><b>Request for Shipment</b></h5> 
-                        </div>
+                    <div class="card" id="requestShipmentIcon">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
+                        alt="Avatar" style="width:100%">
+                      <div class="card bg-info">
+                        <h5><b>Request for Shipment</b></h5>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -320,17 +320,19 @@
                 <div class="card-body">
                   <h4 class="card-title">Shipper Application</h4>
                   <div class="card-columns">
-                    <div class="card" id="acceptLC">
-                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Accept Shipment</b></h5> 
-                        </div>
+                    <div class="card" id="acceptShipmentIcon">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
+                        alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Accept Shipment</b></h5>
+                      </div>
                     </div>
-                    <div class="card" id="acceptLC">
-                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Complete Shipment</b></h5> 
-                        </div>
+                    <div class="card" id="completeShipmentIcon">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
+                        alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Complete Shipment</b></h5>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -343,18 +345,27 @@
                 <div class="card-body">
                   <h4 class="card-title">Inspector Application</h4>
                   <div class="card-columns">
-                    <div class="card" id="acceptLC">
-                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Accept Inspection</b></h5> 
-                        </div>
+                    <div class="card" id="acceptInspectionIcon">
+                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar"
+                        style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Accept Inspection</b></h5>
+                      </div>
                     </div>
-                    <div class="card" id="acceptLC">
-                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
-                        <div class="card bg-info">
-                          <h5><b>Complete Inspection</b></h5> 
-                        </div>
+                    <div class="card" id="completeInspectionIcon">
+                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar"
+                        style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Complete Inspection</b></h5>
+                      </div>
                     </div>
+                    <div class="card" id="inspectorBuyerAkwIcon">
+                        <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar"
+                          style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Acknowledge Inspection</b></h5>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -364,63 +375,139 @@
         <!--UI Component-->
 
 
-        <div class="details">
-          <div class="container" id="applyLCForm" style="display: none">
+        <div id="details">
+          <div class="container" id="applyLc" style="display: none">
             <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Apply New Letter of Credit</h4>
-                    <div class="container">
-                      <form >
-                        <label for="exporter">Exporter Address</label>
-                        <input type="text" id="exporter" value="">
-                        <label for="importer">Importer address</label> 
-                        <input type="text" id="importer" value="">
-                        <label for="shipper">Shipper address</label> 
-                        <input type="text" id="shipper" value="">
-                        <label for="insExporter">Inspector address</label> 
-                        <input type="text" id="insExporter" value="">
-                        <label for="issuingBank">Issuing Bank address</label>
-                        <input type="text" id="issuingBank" value="">
-                        <label for="shipment">Shipment Value</label>
-                        <input type="double" id="shipment" min="0">
-                        <br>
-                        <input type="submit" id="submitLC" value="Submit">
-                        <p id="boeCreation"></p>
-                        <p id="boeCreatedDetails"></p>
-                        <br>
-                    </form> 
-                  </div>
+              <div class="card-body">
+                <h4 class="card-title">Apply New Letter of Credit</h4>
+                <div class="container">
+                  <form>
+                    <label for="exporter">Exporter Address</label>
+                    <input type="text" id="exporter" >
+                    <label for="importer">Importer address</label>
+                    <input type="text" id="importer">
+                    <label for="shipper">Shipper address</label>
+                    <input type="text" id="shipper">
+                    <label for="insImporter">Inspector address</label>
+                    <input type="text" id="insImporter">
+                    <label for="issuingBank">Issuing Bank address</label>
+                    <input type="text" id="issuingBank">
+                    <label for="shipment">Shipment Value</label>
+                    <input type="text" id="shipment">
+                    <br>
+                    <button class="btn btn-default btn-create" input type="submit">Submit</button>
+                    <!-- <input type="submit" id="submitLC" value="Submit"> -->
+                    <p id="boeCreation"></p>
+                    <p id="boeCreatedDetails"></p>
+                    <br>
+                  </form>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="container" id="acceptLc" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Accept Letter of Credit</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd">
+                    <button class="btn btn-default btn-viewDetails" input type="submit">View Details </button>
+                    <button class="btn btn-default btn-accept" input type="submit"> Accept </button>
+                    <p id="acceptLcConPrice" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="acceptLcExporter" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="acceptLcImporter" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="currentBOE" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="acceptStatus" style="font-family:Noto Sans; font-size:22px; font-color:'green'"></p>
+                    <br>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="container" id="inspectRequestSeller" style="display: none">
-              <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Request for Inspector</h4>
-                    <div class="container">
-                      <form>
-                          <label for="lcAdd1">Letter Of Credit Address:</label>
-                          <input type="text" id="lcAdd1">
-                          <label for="inspSeller">Inspector's Address:</label>
-                          <input type="text" id="inspSeller" value="0x2ee38B65A23329163c1E65a7472006512e04F76C">
-                          <br/>
-                          <input type="submit" id="requestInspSeller" value="Submit">
-                          <!-- <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button> -->
-                          <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
-                          <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
-                          <br>
-                      </form>
-                    </div>
-                  </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Request for Inspector</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd1">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd1">
+                    <label for="inspSeller">Inspector's Address:</label>
+                    <input type="text" id="inspSeller">
+                    <br/>
+                    <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button>
+                    <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
+                  </form>
+                </div>
               </div>
             </div>
-     
+          </div>
+
+          <div class="container" id="acceptInspectSeller" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Accept Inspection</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd2">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd2">
+                    <button class="btn btn-default btn-acceptInspectSeller" input type="submit"> Accept </button>
+                    <p id="sellerInspectStatus" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
-            
 
-            <!-- <form id="collectAndPayment" style="display: none">
+          <div class="container" id="completeInspectSeller" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Complete Inspection</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd5">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd5">
+                    <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
+                    <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container" id="collectAndPayment" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Make Payment Upon receiving the goods</h4>
+                <div class="container">
+                    <form>
+                        <label for="lcAdd8">Letter Of Credit Address:</label>
+                        <input type="text" id="lcAdd8">
+                        <button class="btn btn-default btn-collectAndPayment" input type="submit"> Make Payment </button>
+                        <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
+                        <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
+                        <br>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          <!-- <form id="collectAndPayment" style="display: none">
                 <h1> Make Payment Upon receiving the goods</h1>
                 Letter Of Credit Address:
                 <input type="text" id="lcAdd8">
@@ -432,7 +519,8 @@
 
           </div> -->
 
-    <!--       <div id="issueBankForm" style="display: none">
+
+          <!--       <div id="issueBankForm" style="display: none">
             <form id="acceptLc" style="display: none">
               <h1>Letter of Credit</h1>
               Letter Of Credit Address:
@@ -449,29 +537,119 @@
 
           </div> -->
 
-         
-        
 
-    
-        <div class="container" id="requestShipmentForm" style="display: none">
-          <div class="card">
+
+
+
+          <div class="container" id="requestShipmentForm" style="display: none">
+            <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Request for Shipment</h4>
-                <div class="container">  
-                  <form id="requestShipmentForm" style="display: none">
-                    <label for="lcAdde">Letter Of Credit Address:</label>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd3">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd3">
-                    <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment </button>
+                    <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment
+                    </button>
                     <p id="requestShipment" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
                 </div>
               </div>
             </div>
-        </div>
-      </div>
+          </div>
 
-        <div id="inspectorSellerForm" style="display: none">
+
+          <div class="container" id="acceptShipment" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"> Accept Shipment</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd4">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd4">
+                    <button class="btn btn-default btn-acceptShipment" input type="submit"> Accept </button>
+                    <p id="shipperShipStatus" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="bolHolderAccept" style="font-family:Noto Sans; font-size:22px"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="container" id="completeShipment" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"> Complete Shipment</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd6">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd6">
+                    <button class="btn btn-default btn-completeShipment" input type="submit"> Accept </button>
+                    <p id="shipperShipStatusComplete" style="font-family:Noto Sans; font-size:22px"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container" id="completeInspectSeller" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Complete Inspection</h4>
+                <div class="container">
+                  <form>
+                    <label for="lcAdd5">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd5">
+                    <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
+                    <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container" id="inspectorBuyerAkw" style="display: none">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Acknowlege Inspection by Buyers</h4>
+                  <div class="container">
+                  <form>
+                      <label for="lcAdd7">Letter Of Credit Address:</label>
+                      Letter Of Credit Address:
+                      <input type="text" id="lcAdd7">
+                      <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
+                      <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
+                      <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
+                      <br>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+           <!-- <div id="inspectorBuyerForm" style="display:none">
+              <form id="inspectorBuyerAkw" style="display: none">
+                  <h1> Aknowledge Inspection for Buyer </h1>
+                  Letter Of Credit Address:
+                  <input type="text" id="lcAdd7">
+                  <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
+                  <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
+                  <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
+                  <br>
+                </form>
+
+          </div> -->
+
+
+          <!-- <div id="inspectorSellerForm" style="display: none">
           <form id="acceptInspectSeller" style="display: none">
             <h1> Accept Inspection </h1>
             Letter Of Credit Address:
@@ -491,9 +669,11 @@
               <br>
           </form>
 
-        </div>
+        </div> -->
 
-          <div id="shipperForm" style="display: none">
+
+
+          <!-- <div id="shipperForm" style="display: none">
               <form id="acceptShipment" style="display: none">
                   <h1> Accept Shipment </h1>
                   Letter Of Credit Address:
@@ -512,21 +692,9 @@
                   <p id="shipperShipStatusComplete" style="font-family:Noto Sans; font-size:22px"></p>
                   <br>
                 </form>
-          </div>
+          </div> -->
 
-          <div id="inspectorBuyerForm" style="display:none">
-              <form id="inspectorBuyerAkw" style="display: none">
-                  <h1> Aknowledge Inspection for Buyer </h1>
-                  Letter Of Credit Address:
-                  <input type="text" id="lcAdd7">
-                  <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
-                  <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
-                  <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
-                  <br>
-                </form>
-
-          </div>
-
+         
         </div>
       </div>
     </div>
@@ -583,56 +751,47 @@
   //   $('#collectAndPayment').hide();
   // });
 
+
+  $('#importerApp').on('click', function () {
+    $('#overview').show();
+    $('#importerUI').show();
+    $('#exporterUI').hide();
+    $('#issuingBankUI').hide();
+    $('#shipperUI').hide();
+  });
+
+  $('#exporterApp').on('click', function () {
+    $('#overview').show();
+    $('#importerUI').hide();
+    $('#exporterUI').show();
+    $('#issuingBankUI').hide();
+    $('#shipperUI').hide();
+    $('#inspectorUI').hide();
+  });
   
-  $('#importer').on('click', function () {
-      $('#overview').show();
-      $('#importerUI').show();
-      $('#exporterUI').hide();
-      $('#issuingBankUI').hide();
-      $('#shipperUI').hide();
-     
-    
-    
+  $('#issuingBankApp').on('click', function () {
+    $('#overview').show();
+    $('#importerUI').hide();
+    $('#exporterUI').hide();
+    $('#issuingBankUI').show();
+    $('#shipperUI').hide();
+    $('#inspectorUI').hide();
   });
-  $('#exporter').on('click', function () {
-      $('#overview').show();
-      $('#importerUI').hide();
-      $('#exporterUI').show();
-      $('#issuingBankUI').hide();
-      $('#shipperUI').hide();
-      $('#inspectorUI').hide();
-     
-    
+  $('#shipperApp').on('click', function () {
+    $('#overview').show();
+    $('#importerUI').hide();
+    $('#exporterUI').hide();
+    $('#issingBankUI').hide();
+    $('#shipperUI').show();
+    $('#inspectorUI').hide();
   });
-  $('#issuingBank').on('click', function () {
-      $('#overview').show();
-      $('#importerUI').hide();
-      $('#exporterUI').hide();
-      $('#issuingBankUI').show();
-      $('#shipperUI').hide();
-      $('#inspectorUI').hide();
-    
-    
-  });
-  $('#shipper').on('click', function () {
-      $('#overview').show();
-      $('#importerUI').hide();
-      $('#exporterUI').hide();
-      $('#issingBankUI').hide();
-      $('#shipperUI').show();
-      $('#inspectorUI').hide();
-    
-    
-  });
-  $('#inspector').on('click', function () {
-      $('#overview').show();
-      $('#importerUI').hide();
-      $('#exporterUI').hide();
-      $('#issuingBankUI').hide();
-      $('#shipperUI').hide();
-      $('#inspectorUI').show();
-    
-   
+  $('#inspectorApp').on('click', function () {
+    $('#overview').show();
+    $('#importerUI').hide();
+    $('#exporterUI').hide();
+    $('#issuingBankUI').hide();
+    $('#shipperUI').hide();
+    $('#inspectorUI').show();
   });
 
   $('#sidenav').on('click', function () {
@@ -640,34 +799,175 @@
     $('#details').hide();
   });
 
-  $('#details').on('click', function () {
+  $('#applyLcIcon').on('click', function () {
+    $('#applyLc').show();
     $('#overview').hide();
+    $('#details').show();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
   });
- 
-  $('#applyLC').on('click', function () {
-      $('#applyLCForm').show();
-      $('#overview').hide();
+
+   $('#acceptLcIcon').on('click', function () {
+    $('#acceptLc').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#applyLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
   });
 
   $('#requestInsSellerIcon').on('click', function () {
     $('#inspectRequestSeller').show();
     $('#overview').hide();
+    $('#details').show();
+    $('#acceptLc').hide();
+    $('#applyLc').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
   });
 
+  $('#acceptInspectionIcon').on('click', function () {
+    $('#acceptInspectSeller').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+  });
+
+  $('#completeInspectionIcon').on('click', function () {
+    $('#completeInspectSeller').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+  });
+
+  $('#requestShipmentIcon').on('click', function () {
+    $('#requestShipmentForm').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#acceptInspectSeller').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+  });
+
+  $('#acceptShipmentIcon').on('click', function () {
+    $('#acceptShipment').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#requestShipmentForm').hide();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#completeShipment').hide();
+    $('#acceptInspectSeller').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+  
+  });
+
+  $('#completeShipmentIcon').on('click', function () {
+    $('#completeShipment').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptShipment').hide();
+    $('#requestShipmentForm').hide();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+  });
+
+  $('#makePaymentIcon').on('click', function () {
+    $('#collectAndPayment').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptShipment').hide();
+    $('#requestShipmentForm').hide();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeShipment').hide();
+    $('#inspectorBuyerAkw').hide();
+  });
+
+   $('#inspectorBuyerAkwIcon').on('click', function () {
+    $('#inspectorBuyerAkw').show();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptShipment').hide();
+    $('#requestShipmentForm').hide();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+  });
+
+  
+
+ 
 
 
-//  // $('#acceptLcIcon').on('click', function () {
-//     $('#acceptLc').hide();
-//     $('#creatBOE').hide();
-//     $('#inspectRequestSellter').hide();
-//     $('#acceptInspectSeller').hide();
-//     $('#requestShipmentForm').show();
-//     $('#acceptShipment').hide();
-//     $('#completeInspectSeller').show();
-//     $('#completeShipment').show();
-//     $('#inspectorBuyerAkw').hide();
-//     $('#collectAndPayment').show();
-//   });
+
+  //  // $('#acceptLcIcon').on('click', function () {
+  //     $('#acceptLc').hide();
+  //     $('#creatBOE').hide();
+  //     $('#inspectRequestSellter').hide();
+  //     $('#acceptInspectSeller').hide();
+  //     $('#requestShipmentForm').show();
+  //     $('#acceptShipment').hide();
+  //     $('#completeInspectSeller').show();
+  //     $('#completeShipment').show();
+  //     $('#inspectorBuyerAkw').hide();
+  //     $('#collectAndPayment').show();
+  //   });
 
   // $('#requestInsSellerIcon').on('click', function () {
   //   $('#acceptLc').hide();
@@ -684,68 +984,68 @@
 
   // user buttons javascript
 
-  $('#importerButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').show();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-    $('#acceptLcIcon').removeClass('picInactive').addClass('picActive');
-    $('#creatBoeIcon').removeClass('picActive').addClass('picInactive');
-  });
+  // $('#importerButton').on('click', function () {
+  //   $('#issueBankForm').hide();
+  //   $('#exporterForm').hide();
+  //   $('#importerForms').show();
+  //   $('#inspectorSellerForm').hide();
+  //   $('#shipperForm').hide();
+  //   $('#inspectorBuyerForm').hide();
+  //   $('#acceptLcIcon').removeClass('picInactive').addClass('picActive');
+  //   $('#creatBoeIcon').removeClass('picActive').addClass('picInactive');
+  // });
 
-  $('#exporterButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').show();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
+  // $('#exporterButton').on('click', function () {
+  //   $('#issueBankForm').hide();
+  //   $('#exporterForm').show();
+  //   $('#importerForms').hide();
+  //   $('#inspectorSellerForm').hide();
+  //   $('#shipperForm').hide();
+  //   $('#inspectorBuyerForm').hide();
+  // });
 
-  $('#issueBankButton').on('click', function () {
-    $('#issueBankForm').show();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
+  // $('#issueBankButton').on('click', function () {
+  //   $('#issueBankForm').show();
+  //   $('#exporterForm').hide();
+  //   $('#importerForms').hide();
+  //   $('#inspectorSellerForm').hide();
+  //   $('#shipperForm').hide();
+  //   $('#inspectorBuyerForm').hide();
+  // });
 
-  $('#inspectorButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').show();
-    $('#shipperForm').hide();
-    $('#inspectorBuyerForm').hide();
-  });
+  // $('#inspectorButton').on('click', function () {
+  //   $('#issueBankForm').hide();
+  //   $('#exporterForm').hide();
+  //   $('#importerForms').hide();
+  //   $('#inspectorSellerForm').show();
+  //   $('#shipperForm').hide();
+  //   $('#inspectorBuyerForm').hide();
+  // });
 
-  $('#shipperButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').show();
-    $('#inspectorBuyerForm').hide();
-    $('#acceptShipment').show();
-    $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
-    $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
-    $('#completeShipment').hide();
-  });
+  // $('#shipperButton').on('click', function () {
+  //   $('#issueBankForm').hide();
+  //   $('#exporterForm').hide();
+  //   $('#importerForms').hide();
+  //   $('#inspectorSellerForm').hide();
+  //   $('#shipperForm').show();
+  //   $('#inspectorBuyerForm').hide();
+  //   $('#acceptShipment').show();
+  //   $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
+  //   $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
+  //   $('#completeShipment').hide();
+  // });
 
-  $('#inspectorBuyerButton').on('click', function () {
-    $('#issueBankForm').hide();
-    $('#exporterForm').hide();
-    $('#importerForms').hide();
-    $('#inspectorSellerForm').hide();
-    $('#shipperForm').hide(); 
-    $('#inspectorBuyerForm').show();
-    $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
-    $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
-    $('#inspectorBuyerAkw').show();
-  });
+  // $('#inspectorBuyerButton').on('click', function () {
+  //   $('#issueBankForm').hide();
+  //   $('#exporterForm').hide();
+  //   $('#importerForms').hide();
+  //   $('#inspectorSellerForm').hide();
+  //   $('#shipperForm').hide();
+  //   $('#inspectorBuyerForm').show();
+  //   $('#creatBoeIcon').removeClass('picInactive').addClass('picActive');
+  //   $('#acceptLcIcon').removeClass('picActive').addClass('picInactive');
+  //   $('#inspectorBuyerAkw').show();
+  // });
 
 
 

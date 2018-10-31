@@ -54,7 +54,7 @@ App = {
         var importer = document.getElementById("importer").value;
         var exporter = document.getElementById("exporter").value;
         var shipper = document.getElementById("shipper").value;
-        var inspectorForExp=document.getElementById("insExporter").value;
+        var inspectorForImporter=document.getElementById("insImporter").value;
         var issuingBank=document.getElementById("issuingBank").value;
         var shipmentValue = parseInt(document.getElementById("shipment").value);
         console.log("importer is " + importer)
@@ -69,7 +69,7 @@ App = {
 
             App.contracts.LetterOfCredit.deployed().then(function (instance) {
                 LetterOfCreditInstance = instance;
-                return LetterOfCreditInstance.createBOE(exporter,importer,shipper,inspectorForExp,issuingBank,shipmentValue).then(function(){
+                return LetterOfCreditInstance.createBOE(exporter,importer,shipper,inspectorForImporter,issuingBank,shipmentValue).then(function(){
                     document.getElementById("boeCreation").innerHTML = "Contract " + LetterOfCreditInstance.address + " successfully updated with value " + shipmentValue;
                     document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper+ "<br> Issuing Bank: " + issuingBank +"<br> Inspector for Buyer" + inspectorForExp;
                 });
