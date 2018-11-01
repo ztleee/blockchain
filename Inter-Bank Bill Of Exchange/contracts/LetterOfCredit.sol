@@ -166,15 +166,15 @@ contract LetterOfCredit is Ownable{
         }     
       
         /// pay exporter 93%
-        boe.holder.transfer(SafeMath.div(SafeMath.mul(msg.value,93),100));
+        boe.holder.transfer((msg.value.mul(93)).div(100));
         /// pay inspectorForBuyer 1%
-        inspectorForBuyer.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
+        inspectorForBuyer.transfer(msg.value.mul(1).div(100));
         /// pay inspectorForSeller 1%
-        inspectorForSeller.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
+        inspectorForSeller.transfer(msg.value.mul(1).div(100));
         /// pay shipper 1%
-        shipper.transfer(SafeMath.div(SafeMath.mul(msg.value,1),100));
+        shipper.transfer(msg.value.mul(1).div(100));
         /// pay issuing bank 2%
-        issuingBank.transfer(SafeMath.div(SafeMath.mul(msg.value,2),100));
+        issuingBank.transfer(msg.value.mul(2).div(100));
         /// To do: withdraw function 2% to smart contract
         bol.holder=msg.sender;
         shipmentStatus = shipmentStatusArray[3];  
