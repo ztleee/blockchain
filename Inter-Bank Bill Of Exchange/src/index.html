@@ -492,6 +492,8 @@
                     <form>
                         <label for="lcAdd8">Letter Of Credit Address:</label>
                         <input type="text" id="lcAdd8">
+                        <label for="payAmount">Payment Amount:</label>
+                        <input type="text" id="payAmount">
                         <button class="btn btn-default btn-collectAndPayment" input type="submit"> Make Payment </button>
                         <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
                         <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
@@ -501,6 +503,25 @@
                 </div>
               </div>
             </div>
+
+
+            <div class="container" id="applyLoanForm" style="display: none">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Make Payment Upon receiving the goods</h4>
+                  <div class="container">
+                      <form>
+                          <label for="lcAdd8">Letter Of Credit Address:</label>
+                          <input type="text" id="lcAdd8">
+                          <button class="btn btn-default btn-collectAndPayment" input type="submit"> Make Payment </button>
+                          <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
+                          <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
+                          <br>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
 
@@ -948,6 +969,22 @@
     $('#acceptInspectSeller').hide();
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
+  });
+
+  $('#applyLoanIcon').on('click', function () {
+    $('#inspectorBuyerAkw').hide();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptShipment').hide();
+    $('#requestShipmentForm').hide();
+    $('#completeInspectSeller').hide();
+    $('#applyLc').hide();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#applyLoanForm').show();
   });
 
   

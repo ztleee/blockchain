@@ -68,8 +68,10 @@ App = {
             }
 
             App.contracts.LetterOfCredit.deployed().then(function (instance) {
+                console.log("Bye");
                 LetterOfCreditInstance = instance;
                 return LetterOfCreditInstance.createBOE(exporter,importer,shipper,inspectorForImporter,issuingBank,shipmentValue).then(function(){
+                    console.log("HI");
                     document.getElementById("boeCreation").innerHTML = "Contract " + LetterOfCreditInstance.address + " successfully updated with value " + shipmentValue;
                     document.getElementById("boeCreatedDetails").innerHTML = "Importer: " + importer +"<br> Exporter: " + exporter + "<br> Shipper: " + shipper+ "<br> Issuing Bank: " + issuingBank +"<br> Inspector for Buyer" + inspectorForExp;
                 });
@@ -332,6 +334,7 @@ App = {
 
         var LetterOfCreditInstance;
         var address = document.getElementById("lcAdd8").value;
+        var payAmount = document.getElementById("payAmount").value;
 
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
@@ -340,7 +343,7 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.makePayment().then(function(){                    
+                LetterOfCreditInstance.makePayment({"value":payAmount}).then(function(){                    
                     LetterOfCreditInstance.getBOLHolder().then(function(result){
                         document.getElementById("bolOwnerCollect").innerHTML = "BOL current Owner : " + result; 
                         LetterOfCreditInstance.getShipmentStatus().then(function(result){
