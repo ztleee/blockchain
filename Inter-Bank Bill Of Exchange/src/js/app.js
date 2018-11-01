@@ -30,6 +30,15 @@ App = {
             App.contracts.LetterOfCredit.setProvider(App.web3Provider);
         });
 
+        $.getJSON('Loan.json', function (data) {
+            // Get the necessary contract artifact file and instantiate it with truffle-contract
+            var LoanArtifact = data;
+            App.contracts.Loan = TruffleContract(LoanArtifact);
+
+            // Set the provider for our contract
+            App.contracts.Loan.setProvider(App.web3Provider);
+        });
+
         return App.bindEvents();
     },
 
@@ -45,6 +54,7 @@ App = {
         $(document).on('click', '.btn-completeShipment', App.completeShipment);
         $(document).on('click', '.btn-inspectorBuyerAkw', App.inspectorBuyerAkw);
         $(document).on('click', '.btn-collectAndPayment', App.collectAndPayment);
+        $(document).on('click', '.btn-createLoan', App.createLoan);
     },
 
     createBoe: function(event) {
@@ -354,6 +364,36 @@ App = {
                 
             }).catch(function (err) {
                 console.log(err.message);
+            });
+        });
+    },
+
+    
+
+    createLoan: function(event) {        
+        event.preventDefault();
+
+        var LoanInstance;
+        var lcAdd = document.getElementById("lcAdd9").value;
+        var exporterLoan = document.getElementById("exporterLoan").value;
+        var loanAmt = parseInt(document.getElementById("loanAmount").value);
+
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.Loan.deployed().then(function (instance) {
+                LoanInstance = instance;
+                return LoanInstance.createLoan(exporterLoan,loanAmt,lcAdd).then(function(){
+                    LoanInstance.retrieveBiddingStatus().then(function(result){
+                        document.getElementById("biddingStatus").innerHTML = "Bidding Status" + result;
+                    });  
+                    
+                });
+            }).catch(function (err) {
+                console.log(err);
             });
         });
     },

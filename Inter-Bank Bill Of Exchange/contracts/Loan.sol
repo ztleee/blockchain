@@ -1,13 +1,9 @@
 pragma solidity ^0.4.24;
-//pragma experimental ABIEncoderV2;
-//Ask: Referencing the L/C address or the whole class?
-//Left with converting all to percentage..
-//Adding the date to process smart 
-//We can also automate the send ether after processing..
 
 import "./SafeMath.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";//usage of library
 
-contract SimpleLoan {
+contract Loan is Ownable {
     using SafeMath for uint256;
     
     address exporter;
@@ -34,7 +30,11 @@ contract SimpleLoan {
         bool paid;
     }
         
-    constructor(address exporterAddr, uint256 loanAmountVal, address letterOfCreditAddr) public{
+    constructor() public{
+        
+    }
+        
+    function createLoan(address exporterAddr, uint256 loanAmountVal, address letterOfCreditAddr) public{
         biddingStatusArray = ["Started","Closed"];
         errMsg = [
                 "Unauthorized Transaction",//0
@@ -51,8 +51,7 @@ contract SimpleLoan {
         
       
     }
-    
-    //Ask: How to disable bidforloan being clicked again.
+
     function bidForLoan(uint256 interestRate) public payable{
         require(equal(biddingStatus,biddingStatusArray[0]),errMsg[4]); //Requires to be started
         Bid memory current = Bid(msg.sender, SafeMath.mul(interestRate,1 ether));
@@ -60,15 +59,12 @@ contract SimpleLoan {
         
     }
     
-    //someone has to pay for processing?
-    //if the same rate then the first person gets the bid.
-    //if the same address, the bidder bids will be overwritten? or assume that they wont bid again
-    //ask: confirm is it surely got people bid? what if nobody bid, do we handle the case?
     function processWinningBid() public{
         require(equal(biddingStatus, biddingStatusArray[0]), errMsg[4]); //must be started then execute
         uint256 lowestRate;
         address winningBank;
         bool initialize = false;
+        biddingStatus = biddingStatusArray[1]; //Closed
         for(uint i = 0; i < bid.length; i++){
             if(initialize){
                 if(bid[i].interestRate < lowestRate){
@@ -83,16 +79,11 @@ contract SimpleLoan {
         }
 
         winningBid = WinningBid(winningBank, lowestRate, false, false);
-        biddingStatus = biddingStatusArray[1]; //Closed
+
     }
 
 
     function issueLoan() public payable{
-        //require(equal(biddingStatus, biddingStatusArray[1]),errMsg[0]); //Closed - Unauthorized Transaction
-        //require(!winningBid.issued, errMsg[0]);// Winning Bid must not be issued - Unauthorized Transaction
-        //require(msg.sender == winningBid.loaningBank, errMsg[0]); //Not same bank - Unauthorized Transaction
-        //require(msg.value == loanAmount, errMsg[1]); //- Answer question above: by right wont happen.. UI handle
-        
         if(!equal(biddingStatus,biddingStatusArray[1])){
             revert(errMsg[0]);
         }else if(winningBid.issued){
@@ -110,10 +101,6 @@ contract SimpleLoan {
     }
     
     function repayLoan() public payable{
-        //require(msg.sender == exporter, errMsg[0]); //Unauthroized Transaction
-        //require(!winningBid.paid, errMsg[0]);//Unauthorized Transaction
-        //require(msg.value == SafeMath.add(loanAmount, winningBid.interestRate), errMsg[1]); //Dont match value
-        
         if(msg.sender != exporter){
             revert(errMsg[0]);
         }else if(winningBid.paid){
