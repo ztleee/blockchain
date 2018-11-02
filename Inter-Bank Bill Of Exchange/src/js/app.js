@@ -55,6 +55,8 @@ App = {
         $(document).on('click', '.btn-inspectorBuyerAkw', App.inspectorBuyerAkw);
         $(document).on('click', '.btn-collectAndPayment', App.collectAndPayment);
         $(document).on('click', '.btn-createLoan', App.createLoan);
+        $(document).on('click', '.btn-bidForLoan', App.bidForLoan);
+        $(document).on('click', '.btn-processWinningBid', App.processWinningBid);
     },
 
     createBoe: function(event) {
@@ -394,6 +396,62 @@ App = {
                 });
             }).catch(function (err) {
                 console.log(err);
+            });
+        });
+    },
+
+    bidForLoan:function(event){
+        event.preventDefault();
+
+        var LoanInstance;
+        var address = document.getElementById("lcAdd10").value;
+        var intAmt = document.getElementById("intAmount").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.Loan.at(address).then(function (instance) {
+                LoanInstance = instance;
+                LoanInstance.bidForLoan(intAmt).then(function(){      
+                    LoanInstance.retrieveBiddingStatus(result).then(function(){
+                        document.getElementById("bidByBank").innerHTML = "Bidding is processing now! <br> Actual Status: " + result;   
+                    });                 
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    processWinningBid:function(event){
+        event.preventDefault();
+
+        var LoanInstance;
+        var address = document.getElementById("lcAdd11").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.Loan.at(address).then(function (instance) {
+                LoanInstance = instance;
+                LoanInstance.processWinningBid().then(function(){
+                    LoanInstance.retrieveLoaningBank().then(function(result1){   
+                        LoanInstance.retrieveLoanAmount().then(function(result2){ 
+                            LoanInstance.retrieveLoanAmount().then(function(result3){              
+                                document.getElementById("winningBank").innerHTML = "Winning Bank is: " + result1 
+                                +"<br>Total Amount Loan for Payment: $" + result2 +"<br>Bidding Status: " + result3 ;  
+                            });                   
+                        });
+                    });      
+                });
+                
+            }).catch(function (err) {
+                console.log(err.message);
             });
         });
     },

@@ -277,6 +277,20 @@
                         <h5><b>Accept Letter of Credit</b></h5>
                       </div>
                     </div>
+                    <div class="card" id="bidLoan">
+                        <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png"
+                          alt="Avatar" style="width:94%">
+                        <div class="card bg-info">
+                          <h5><b>Bid for the loan</b></h5>
+                        </div>
+                    </div>
+                    <div class="card" id="releaseLoan">
+                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png"
+                        alt="Avatar" style="width:94%">
+                      <div class="card bg-info">
+                        <h5><b>Release the Loan</b></h5>
+                      </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -309,6 +323,13 @@
                         alt="Avatar" style="width:100%">
                       <div class="card bg-info">
                         <h5><b>Request for Shipment</b></h5>
+                      </div>
+                    </div>
+                    <div class="card" id="stopBidding">
+                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
+                        alt="Avatar" style="width:100%">
+                      <div class="card bg-info">
+                        <h5><b> Stop Bidding (Loan) </b></h5>
                       </div>
                     </div>
                   </div>
@@ -529,6 +550,43 @@
                 </div>
               </div>
 
+              <div class="container" id="bidForLoan" style="display: none">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Bid for a Loan</h4>
+                    <div class="container">
+                        <form>
+                            <label for="lcAdd10">Letter Of Credit Address:</label>
+                            <input type="text" id="lcAdd10">
+                            <label for="lcAdd8"> Interest Rate: </label>
+                            <input type="text" id="intAmount">
+                            <button class="btn btn-default btn-bidForLoan" input type="submit"> Bid now </button>
+                            <p id="bidByBank" style="font-family:Noto Sans; font-size:22px"></p>
+                            <br>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container" id="exporterStopBidding" style="display: none">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Stop Loan Bidding</h4>
+                      <div class="container">
+                      <form>
+                          <label for="lcAdd11">Letter Of Credit Address:</label>
+                          Letter Of Credit Address:
+                          <input type="text" id="lcAdd11">
+                          <button class="btn btn-default btn-processWinningBid" input type="submit"> Stop the Bidding / Show Winning Bank </button>
+                          <p id="winningBank" style="font-family:Noto Sans; font-size:22px"></p>
+                          <br>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 
 
 
@@ -657,7 +715,30 @@
                 </div>
               </div>
             </div>
+          </div> 
+
+          <div class="container" id="releaseLoanNow" style="display: none">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Acknowlege Inspection by Buyers</h4>
+                <div class="container">
+                <form>
+                    <label for="lcAdd12">Letter Of Credit Address:</label>
+                    Letter Of Credit Address:
+                    <input type="text" id="lcAdd12">
+                    <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
+                    <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
+                </form>
+              </div>
+            </div>
           </div>
+        </div>
+
+
+          
+          
 
 
 
@@ -784,7 +865,8 @@
     $('#importerUI').show();
     $('#exporterUI').hide();
     $('#issuingBankUI').hide();
-    $('#shipperUI').hide();
+    $('#shipperUI').hide();  
+    $('#bidLoan').hide();
   });
 
   $('#exporterApp').on('click', function () {
@@ -793,7 +875,8 @@
     $('#exporterUI').show();
     $('#issuingBankUI').hide();
     $('#shipperUI').hide();
-    $('#inspectorUI').hide();
+    $('#inspectorUI').hide();    
+    $('#bidLoan').hide();
   });
   
   $('#issuingBankApp').on('click', function () {
@@ -803,6 +886,7 @@
     $('#issuingBankUI').show();
     $('#shipperUI').hide();
     $('#inspectorUI').hide();
+    $('#bidLoan').show();
   });
   $('#shipperApp').on('click', function () {
     $('#overview').show();
@@ -810,7 +894,8 @@
     $('#exporterUI').hide();
     $('#issingBankUI').hide();
     $('#shipperUI').show();
-    $('#inspectorUI').hide();
+    $('#inspectorUI').hide();  
+    $('#bidLoan').hide();
   });
   $('#inspectorApp').on('click', function () {
     $('#overview').show();
@@ -818,7 +903,8 @@
     $('#exporterUI').hide();
     $('#issuingBankUI').hide();
     $('#shipperUI').hide();
-    $('#inspectorUI').show();
+    $('#inspectorUI').show();  
+    $('#bidLoan').hide();
   });
 
   $('#sidenav').on('click', function () {
@@ -839,10 +925,12 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
    $('#acceptLcIcon').on('click', function () {
-    $('#acceptLc').show();
+    $('#acceptLc').hide();
     $('#overview').hide();
     $('#details').show();
     $('#applyLc').hide();
@@ -854,6 +942,8 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#requestInsSellerIcon').on('click', function () {
@@ -869,6 +959,8 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#acceptInspectionIcon').on('click', function () {
@@ -884,6 +976,8 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#completeInspectionIcon').on('click', function () {
@@ -899,6 +993,8 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#requestShipmentIcon').on('click', function () {
@@ -914,6 +1010,8 @@
     $('#acceptInspectSeller').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#acceptShipmentIcon').on('click', function () {
@@ -929,6 +1027,8 @@
     $('#acceptInspectSeller').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   
   });
 
@@ -945,6 +1045,8 @@
     $('#acceptInspectSeller').hide();
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#makePaymentIcon').on('click', function () {
@@ -960,6 +1062,8 @@
     $('#acceptInspectSeller').hide();
     $('#completeShipment').hide();
     $('#inspectorBuyerAkw').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
    $('#inspectorBuyerAkwIcon').on('click', function () {
@@ -975,6 +1079,8 @@
     $('#acceptInspectSeller').hide();
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
   });
 
   $('#applyLoanIcon').on('click', function () {
@@ -991,6 +1097,62 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#applyLoanForm').show();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
+  });
+
+   $('#bidLoan').on('click', function () {
+    $('#applyLc').hide();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+    $('#bidForLoan').show();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').hide();
+  });
+
+  $('#stopBidding').on('click', function () {
+    $('#applyLc').hide();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+    $('#bidForLoan').hide();
+    $('#exporterStopBidding').show();
+    $('#releaseLoanNow').hide();
+  });
+
+  $('#releaseLoan').on('click', function () {
+    $('#applyLc').hide();
+    $('#overview').hide();
+    $('#details').show();
+    $('#acceptLc').hide();
+    $('#inspectRequestSeller').hide();
+    $('#acceptInspectSeller').hide();
+    $('#completeInspectSeller').hide();
+    $('#requestShipmentForm').hide();
+    $('#acceptShipment').hide();
+    $('#completeShipment').hide();
+    $('#collectAndPayment').hide();
+    $('#inspectorBuyerAkw').hide();
+    $('#bidForLoan').hide();
+    $('#exporterStopBidding').hide();
+    $('#releaseLoanNow').show();
   });
 
   
