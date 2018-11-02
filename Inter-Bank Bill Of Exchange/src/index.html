@@ -566,7 +566,7 @@
                     <input type="text" id="exporterLoan">
                     <label for="lcAdd8">Loan Amount:</label>
                     <input type="text" id="loanAmount">
-                    <button class="btn btn-default btn-createLoan" input type="submit"> Make Payment </button>
+                    <button class="btn btn-default btn-createLoan" input type="submit"> Apply for a Loan </button>
                     <p id="biddingStatus" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
@@ -581,7 +581,7 @@
                 <h4 class="card-title">Bid for a Loan</h4>
                 <div class="container">
                   <form>
-                    <label for="lcAdd10">Letter Of Credit Address:</label>
+                    <label for="lcAdd10">Loan Smart Contract Address:</label>
                     <input type="text" id="lcAdd10">
                     <label for="lcAdd8"> Interest Rate: </label>
                     <input type="text" id="intAmount">
@@ -600,8 +600,7 @@
                 <h4 class="card-title"> Stop Loan Bidding</h4>
                 <div class="container">
                   <form>
-                    <label for="lcAdd11">Letter Of Credit Address:</label>
-                    Letter Of Credit Address:
+                    <label for="lcAdd11">Loan Smart Contract Address:</label>                    Letter Of Credit Address:
                     <input type="text" id="lcAdd11">
                     <button class="btn btn-default btn-processWinningBid" input type="submit"> Stop the Bidding / Show Winning Bank </button>
                     <p id="winningBank" style="font-family:Noto Sans; font-size:22px"></p>
@@ -728,11 +727,11 @@
                           <form>
                             <button class="btn btn-default btn-loanDetails" input type="submit"> View Loan Details </button>
                             <p id="reviewLoanDetails"></p>
-                            <label for="lcAdd12">Letter Of Credit Address:</label>
+                            <label for="lcAdd12">Loan Address:</label>
                             <input type="text" id="lcAdd12">
                             <label for="issuingAmt"> Enter the Loan Amount </label>
                             <input type="text" id="issuingAmt">
-                            <button class="btn btn-default btn-issueLoan" input type="submit"> Aknowledge Inspection </button>
+                            <button class="btn btn-default btn-issueLoan" input type="submit"> Release the Loan </button>
                             <p id="issueLoanP" style="font-family:Noto Sans; font-size:22px"></p>
                             <br>
                           </form>
@@ -1137,7 +1136,7 @@
     $('#applyLc').hide();
     $('#overview').hide();
     $('#details').show();
-    $('#acceptLc').hide();
+    $('#acceptLc').show();
     $('#inspectRequestSeller').hide();
     $('#acceptInspectSeller').hide();
     $('#completeInspectSeller').hide();
@@ -1151,7 +1150,6 @@
     $('#releasingLoan').hide();
     $('#exporterRepayLoan').hide(); 
     $('#applyLoanForm').hide();
-    $('#acceptLc').hide();
   });
 
 
