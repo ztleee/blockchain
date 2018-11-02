@@ -154,6 +154,16 @@ contract Loan is Ownable {
         bytes memory b = bytes(_b);
         return keccak256(a) == keccak256(b) ;
     }
+	
+	function retrieveIssue() public view returns  (bool){
+        return winningBid.issued;
+    }
+	
+	function retrievePaid() public view returns  (bool){
+        return winningBid.paid;
+    }
+	
+	
 
     
 }
