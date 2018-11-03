@@ -53,7 +53,7 @@
       z-index: 1;
       top: 0;
       left: 0;
-      background-color: #25383C;
+      background-color:  	#355665;
       overflow-x: hidden;
       padding-top: 20px;
     }
@@ -62,7 +62,7 @@
       padding: 6px 6px 6px 32px;
       text-decoration: none;
       font-size: 25px;
-      color: #818181;
+      color: #F2F2F2;
       display: block;
     }
 
@@ -86,28 +86,65 @@
     }
 
     .picInactive {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       margin: auto;
       border: 2px solid #2A3F54;
       border-radius: 300px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       display: flex;
-      opacity: 0.7;
-      background-color: white;
       margin-bottom: 20px;
+      background-color: 	#223E4A;
+    }
+    
+.picInactive .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.picInactive:hover .tooltiptext {
+    visibility: visible;
+}
+.picActive .tooltiptext {
+  visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+
+    .image{
+      padding:5px;
+      border:none;
+    }
+    .image:focus{
+     outline:none;
     }
 
     .picActive {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       margin: auto;
       border: 2px solid #2A3F54;
       border-radius: 300px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       display: flex;
       opacity: 1;
-      background-color: white;
+      background-color: #A4B9CC;
       margin-bottom: 20px;
     }
 
@@ -150,9 +187,17 @@
     }
 
     .container {
+     
       border-radius: 5px;
       background-color: #f2f2f2;
-      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      padding: 40px;
+    }
+    .card{
+      margin-top:25px;
+    }
+    .card-title{
+      font-weight:bold;
     }
 
     .card-columns .card {
@@ -181,26 +226,32 @@
           style="width: 80px; height: 80px; margin: auto;">
       </div> -->
 
-        <div class="picInactive" id="importerApp">
-          <input class="image" type="image" src="images/importer.png" style="width: 80px; height: 80px; margin: auto;">
+        <div class="picInactive " id="importerApp">
+          <span class="tooltiptext">Impoter</span>
+          <input class="image" type="image" src="images/buyer.png" style="width: 80px; height: 80px; margin: auto;">
+          
         </div>
 
         <div class="picInactive" id="exporterApp">
-          <input class="image" type="image" src="https://cdn.iconscout.com/public/images/icon/premium/png-512/log-out-33d16d287affdb35-512x512.png"
+            <span class="tooltiptext">Expoter</span>
+          <input class="image" type="image" src="images/seller.png"
             style="width: 80px; height: 80px; margin: auto;">
         </div>
 
         <div class="picInactive" id="shipperApp">
+            <span class="tooltiptext">Shipper</span>
           <input class="image" type="image" src="images/shipper.png" style="width: 80px; height: 80px; margin: auto;">
         </div>
 
         <div class="picInactive" id="inspectorApp">
-          <input class="image" type="image" src="https://www.bsu.edu/-/media/www/departmentalcontent/careerservices/myersbriggs/icons/istj.png?h=250&w=250&hash=ED801BA493F9CAAE26D4D06FF14425F8DFD78445&la=en"
+            <span class="tooltiptext">Inspectorr</span>
+          <input class="image" type="image" src="images/inspector.png"
             style="width: 80px; height: 80px; margin: auto;">
         </div>
 
         <div class="picInactive" id="issuingBankApp">
-          <input class="image" type="image" src="http://desafiospublicos.argentina.gob.ar/uploads/Idea/362eb9_bank-building-business-construction-finance-money-3a83d792c48643c6-512x512.png?w=220&height=220&crop-to-fit"
+            <span class="tooltiptext">Bank</span>
+          <input class="image" type="image" src="images/bank.png"
             style="width: 80px; height: 80px; margin: auto;">
         </div>
 
@@ -238,25 +289,24 @@
 
         <!--UI Component-->
         <div id="overview">
-          <div id="importerUI">
-            <div class="container">
-              <div class="card">
+          <div id="importerUI" >
+            <div class="container" style=" margin-top:65px;height:600px;">
+              <div class="card" style="height:500px;width:1050px">
                 <div class="card-body">
-                  <h4 class="card-title">Importer Application</h4>
-                  <div class="card-columns">
+                  <h3 class="card-title">Importer Application</h3>
+                  <div class="card-columns" style="height:600px;width:1000px">
                     <div class="card" id="applyLcIcon">
-                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                      <img src="images/LOCapplication.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card bg-info" >
+                        <h5 style="margin-left:45px;padding:5px">
                           <b>Apply Letter of Credit</b>
                         </h5>
                       </div>
                     </div>
-                    <div class="card" id="makePaymentIcon">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                        alt="Avatar" style="width:100%">
-                      <div class="card bg-info">
-                        <h5>
+                    <div class="card" id="makePaymentIcon" style="margin-left:20px">
+                        <img src="images/payment.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card " style="background-color:#A68059">
+                        <h5 style="margin-left:30px;padding:5px;">
                           <b>Collect and Make Payment</b>
                         </h5>
                       </div>
@@ -268,86 +318,87 @@
           </div>
 
           <div id="issuingBankUI" style="display: none">
-            <div class="container">
+            <div class="container" style=" margin-top:65px;height:600px;">
+              <div class="card" style="height:500px;width:1050px" >
                 <div class="card-body">
                   <h4 class="card-title">Issuing Bank Application</h4>
-                  <div class="card-columns">
+                  <div class="card-columns" style="height:600px;width:1000px">
                     <div class="card" id="acceptLCButton">
-                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                      <img src="images/pending.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:darkgoldenrod ">
+                        <h5 style="margin-left:45px;padding:5px;">
                           <b>Accept Letter of Credit</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="bidLoan">
-                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
+                      <img src="images/bidding.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
                       <div class="card bg-info">
-                        <h5>
+                        <h5 style="margin-left:75px;padding:5px;">
                           <b>Bid for the loan</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="releaseLoan">
-                      <img src="http://www.capitalbank.co.mz/wp-content/uploads/2015/02/icon-letter-credit-full.png" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                      <img src="images/accpect.png"  style="width:300px;height:300px;padding:20px;margin-top:10px">
+                      <div class="card" style="background-color:#45a049 ">
+                        <h5 style="margin-left:75px;padding:5px;">
                           <b>Release the Loan</b>
                         </h5>
                       </div>
                     </div>
                   </div>
               </div>
+              </div>
+              </div>
             </div>      
 
           </div>
 
           <div id="exporterUI" style="display: none">
-            <div class="container">
-              <div class="card">
+            <div class="container" style=" margin-top:65px;margin-bottom:25px">
+              <div class="card" style="width:1050px">
                 <div class="card-body">
                   <h4 class="card-title">Exporter Application</h4>
                   <div class="card-columns">
                     <div class="card" id="applyLoanIcon">
-                      <img src="images/requestLoan.png" alt="Avatar" style="width:94%">
+                        <img src="images/Loanapplication.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
                       <div class="card bg-info">
-                        <h5>
+                        <h5 style="margin-left:90px;padding:5px;">
                           <b>Apply Loan</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="requestInsSellerIcon">
-                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:95%">
+                        <img src="images/inspection.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
 
-                      <div class="card bg-info">
-                        <h5>
+                      <div class="card" style="background-color:darkgoldenrod ">
+                        <h5 style="margin-left:60px;padding:5px;">
                           <b>Request Inspection</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="requestShipmentIcon">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                        alt="Avatar" style="width:100%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/shipping.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      
+                      <div class="card" style="background-color:darkgoldenrod ">
+                        <h5 style="margin-left:55px;padding:5px;">
                           <b>Request for Shipment</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="stopBidding">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                        alt="Avatar" style="width:100%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/stopBidding.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:#E35049 ">
+                        <h5 style="margin-left:55px;padding:5px;">
                           <b> Stop Bidding (Loan) </b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="RepayLoan">
-                        <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                          alt="Avatar" style="width:100%">
-                        <div class="card bg-info">
-                          <h5>
+                        <img src="images/cash.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                        <div class="card " style="background-color:#A68059">
+                          <h5 style="margin-left:65px;padding:5px;">
                             <b> Repaying the Loan </b>
                           </h5>
                         </div>
@@ -359,25 +410,23 @@
           </div>
 
           <div id="shipperUI" style="display: none">
-            <div class="container">
-              <div class="card">
+            <div class="container" style=" margin-top:65px;margin-bottom:25px">
+              <div class="card" style="width:1050px">
                 <div class="card-body">
                   <h4 class="card-title">Shipper Application</h4>
                   <div class="card-columns">
                     <div class="card" id="acceptShipmentIcon">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                        alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/acceptShipment.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:darkgoldenrod ">
+                        <h5 style="margin-left:65px;padding:5px;">
                           <b>Accept Shipment</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="completeShipmentIcon">
-                      <img src="https://us.123rf.com/450wm/ideyweb/ideyweb1710/ideyweb171000057/87378537-delivery-service-receiving-package-box-from-courier-to-customer-payment-.jpg?ver=6"
-                        alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/shipped.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:#45a049 ">
+                        <h5 style="margin-left:65px;padding:5px;">
                           <b>Complete Shipment</b>
                         </h5>
                       </div>
@@ -389,31 +438,31 @@
           </div>
 
           <div id="inspectorUI" style="display: none">
-            <div class="container">
-              <div class="card">
+            <div class="container" style=" margin-top:65px;margin-bottom:25px">
+              <div class="card" style="width:1050px">
                 <div class="card-body">
                   <h4 class="card-title">Inspector Application</h4>
                   <div class="card-columns">
                     <div class="card" id="acceptInspectionIcon">
-                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/AcceptInspection.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:darkgoldenrod ">
+                        <h5 style="margin-left:65px;padding:5px;">
                           <b>Accept Inspection</b>
                         </h5>
                       </div>
                     </div>
                     <div class="card" id="completeInspectionIcon">
-                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/completeInspection.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card" style="background-color:#45a049 ">
+                        <h5 style="margin-left:55px;padding:5px;">
                           <b>Complete Inspection</b>
-                        </h5>
+                        </h5 >
                       </div>
                     </div>
                     <div class="card" id="inspectorBuyerAkwIcon">
-                      <img src="https://irun.kiev.ua/wp-content/uploads/2018/01/tourist-checklist.jpg" alt="Avatar" style="width:94%">
-                      <div class="card bg-info">
-                        <h5>
+                        <img src="images/AcknowledgeInspection.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <div class="card bg-info" >
+                        <h5 style="margin-left:45px;padding:5px;">
                           <b>Acknowledge Inspection</b>
                         </h5>
                       </div>
@@ -428,26 +477,27 @@
 
 
         <div id="details">
-          <div class="container" id="applyLc" style="display: none">
+          <div class="container" id="applyLc" style="display: none;margin-top:20px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Apply New Letter of Credit</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="exporter">Exporter Address</label>
+                    <label for="exporter" style="font-weight:bold">Exporter Address:</label>
                     <input type="text" id="exporter">
-                    <label for="importer">Importer address</label>
+                    <label for="importer" style="font-weight:bold">Importer address:</label>
                     <input type="text" id="importer">
-                    <label for="shipper">Shipper address</label>
+                    <label for="shipper" style="font-weight:bold">Shipper address:</label>
                     <input type="text" id="shipper">
-                    <label for="insImporter">Inspector address</label>
+                    <label for="insImporter" style="font-weight:bold">Inspector address:</label>
                     <input type="text" id="insImporter">
-                    <label for="issuingBank">Issuing Bank address</label>
+                    <label for="issuingBank" style="font-weight:bold">Issuing Bank address:</label>
                     <input type="text" id="issuingBank">
-                    <label for="shipment">Shipment Value</label>
+                    <label for="shipment" style="font-weight:bold">Shipment Value:</label>
                     <input type="text" id="shipment">
                     <br>
-                    <button class="btn btn-default btn-create" input type="submit">Submit</button>
+                    <button class="btn btn-default btn-create" input type="submit" style="font-weight:bold;background-color: darkgoldenrod;color:white;font-size: larger;padding:10px 20px">Submit</button>
                     <!-- <input type="submit" id="submitLC" value="Submit"> -->
                     <p id="boeCreation"></p>
                     <p id="boeCreatedDetails"></p>
@@ -458,16 +508,17 @@
             </div>
           </div>
 
-          <div class="container" id="acceptLc" style="display: none">
+          <div class="container" id="acceptLc" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Accept Letter of Credit</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd">Letter Of Credit Address:</label>
+                    <label for="lcAdd" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd">
-                    <button class="btn btn-default btn-viewDetails" input type="submit">View Details </button>
-                    <button class="btn btn-default btn-accept" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-viewDetails" input type="submit" style="font-weight:bold;background-color: darkgoldenrod;color:white;font-size: larger;padding:10px 20px">View Details </button>
+                    <button class="btn btn-default btn-accept" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Accept </button>
                     <p id="acceptLcConPrice" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="acceptLcExporter" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="acceptLcImporter" style="font-family:Noto Sans; font-size:22px"></p>
@@ -480,18 +531,19 @@
             </div>
           </div>
 
-          <div class="container" id="inspectRequestSeller" style="display: none">
+          <div class="container" id="inspectRequestSeller" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Request for Inspector</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd1">Letter Of Credit Address:</label>
+                    <label for="lcAdd1" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd1">
-                    <label for="inspSeller">Inspector's Address:</label>
+                    <label for="inspSeller" style="font-weight:bold">Inspector's Address:</label>
                     <input type="text" id="inspSeller">
                     <br/>
-                    <button class="btn btn-default btn-requestInspSeller" input type="submit"> Request for Inspection </button>
+                    <button class="btn btn-default btn-requestInspSeller" input type="submit" style="font-weight:bold;background-color: darkgoldenrod;color:white;font-size: larger;padding:10px 20px"> Request for Inspection </button>
                     <p id="assignInspSeller" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="inspectionStatusSeller" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
@@ -501,15 +553,16 @@
             </div>
           </div>
 
-          <div class="container" id="acceptInspectSeller" style="display: none">
+          <div class="container" id="acceptInspectSeller" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Accept Inspection</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd2">Letter Of Credit Address:</label>
+                    <label for="lcAdd2" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd2">
-                    <button class="btn btn-default btn-acceptInspectSeller" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-acceptInspectSeller" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Accept </button>
                     <p id="sellerInspectStatus" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
@@ -518,15 +571,16 @@
             </div>
           </div>
 
-          <div class="container" id="completeInspectSeller" style="display: none">
+          <div class="container" id="completeInspectSeller" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Complete Inspection</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd5">Letter Of Credit Address:</label>
+                    <label for="lcAdd5" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd5">
-                    <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-completeInspectSeller" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Complete </button>
                     <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
                   </form>
                 </div>
@@ -534,17 +588,18 @@
             </div>
           </div>
 
-          <div class="container" id="collectAndPayment" style="display: none">
+          <div class="container" id="collectAndPayment" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Make Payment Upon receiving the goods</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd8">Letter Of Credit Address:</label>
+                    <label for="lcAdd8" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd8">
-                    <label for="payAmount">Payment Amount:</label>
+                    <label for="payAmount" style="font-weight:bold">Payment Amount:</label>
                     <input type="text" id="payAmount">
-                    <button class="btn btn-default btn-collectAndPayment" input type="submit"> Make Payment </button>
+                    <button class="btn btn-default btn-collectAndPayment" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Make Payment </button>
                     <p id="bolStatusCollect" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="bolOwnerCollect" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
@@ -554,19 +609,20 @@
             </div>
           </div>
 
-          <div class="container" id="applyLoanForm" style="display: none">
+          <div class="container" id="applyLoanForm" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Apply Loan</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd9">Letter Of Credit Address:</label>
+                    <label for="lcAdd9" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd9">
-                    <label for="lcAdd8">Expoter Address / Borrower Address:</label>
+                    <label for="lcAdd8" style="font-weight:bold">Expoter Address / Borrower Address:</label>
                     <input type="text" id="exporterLoan">
-                    <label for="lcAdd8">Loan Amount:</label>
+                    <label for="lcAdd8" style="font-weight:bold">Loan Amount:</label>
                     <input type="text" id="loanAmount">
-                    <button class="btn btn-default btn-createLoan" input type="submit"> Apply for a Loan </button>
+                    <button class="btn btn-info btn-createLoan" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Apply for a Loan </button>
                     <p id="biddingStatus" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
@@ -575,17 +631,18 @@
             </div>
           </div>
 
-          <div class="container" id="bidForLoan" style="display: none">
+          <div class="container" id="bidForLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Bid for a Loan</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd10">Loan Smart Contract Address:</label>
+                    <label for="lcAdd10" style="font-weight:bold">Loan Smart Contract Address:</label>
                     <input type="text" id="lcAdd10">
-                    <label for="lcAdd8"> Interest Rate: </label>
+                    <label for="lcAdd8" style="font-weight:bold"> Interest Rate: </label>
                     <input type="text" id="intAmount">
-                    <button class="btn btn-default btn-bidForLoan" input type="submit"> Bid now </button>
+                    <button class="btn btn-info btn-bidForLoan" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Bid now </button>
                     <p id="bidByBank" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
@@ -594,15 +651,16 @@
             </div>
           </div>
 
-          <div class="container" id="exporterStopBidding" style="display: none">
+          <div class="container" id="exporterStopBidding" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title"> Stop Loan Bidding</h4>
-                <div class="container">
+                <br/>
+                <div class="container_body">
                   <form>
-                    <label for="lcAdd11">Loan Smart Contract Address:</label>                    Letter Of Credit Address:
+                    <label for="lcAdd11" style="font-weight:bold">Loan Smart Contract Address:</label>   
                     <input type="text" id="lcAdd11">
-                    <button class="btn btn-default btn-processWinningBid" input type="submit"> Stop the Bidding / Show Winning Bank </button>
+                    <button class="btn btn-danger btn-processWinningBid" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Stop the Bidding / Show Winning Bank </button>
                     <p id="winningBank" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
                   </form>
@@ -613,15 +671,16 @@
 
           
 
-          <div class="container" id="requestShipmentForm" style="display: none">
+          <div class="container" id="requestShipmentForm" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Request for Shipment</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd3">Letter Of Credit Address:</label>
+                    <label for="lcAdd3" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd3">
-                    <button class="btn btn-default btn-requestShipment" input type="submit"> Request for Shipment
+                    <button class="btn btn-default btn-requestShipment" input type="submit" style="font-weight:bold;background-color: darkgoldenrod;color:white;font-size: larger;padding:10px 20px"> Request for Shipment
                     </button>
                     <p id="requestShipment" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
@@ -632,15 +691,16 @@
           </div>
 
 
-          <div class="container" id="acceptShipment" style="display: none">
+          <div class="container" id="acceptShipment" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title"> Accept Shipment</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd4">Letter Of Credit Address:</label>
+                    <label for="lcAdd3" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd4">
-                    <button class="btn btn-default btn-acceptShipment" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-acceptShipment" input type="submit"  style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Accept </button>
                     <p id="shipperShipStatus" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="bolHolderAccept" style="font-family:Noto Sans; font-size:22px"></p>
                   </form>
@@ -649,15 +709,16 @@
             </div>
           </div>
 
-          <div class="container" id="completeShipment" style="display: none">
+          <div class="container" id="completeShipment" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title"> Complete Shipment</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd6">Letter Of Credit Address:</label>
+                    <label for="lcAdd6" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd6">
-                    <button class="btn btn-default btn-completeShipment" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-completeShipment" input type="submit"  style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Complete </button>
                     <p id="shipperShipStatusComplete" style="font-family:Noto Sans; font-size:22px"></p>
                   </form>
                 </div>
@@ -665,15 +726,16 @@
             </div>
           </div>
 
-          <div class="container" id="completeInspectSeller" style="display: none">
+          <div class="container" id="completeInspectSeller" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Complete Inspection</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd5">Letter Of Credit Address:</label>
+                    <label for="lcAdd5" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd5">
-                    <button class="btn btn-default btn-completeInspectSeller" input type="submit"> Accept </button>
+                    <button class="btn btn-default btn-completeInspectSeller" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#45a049;color:white;font-size: larger;padding:10px 20px"> Complete </button>
                     <p id="completeInspectSellerP" style="font-family:Noto Sans; font-size:22px"></p>
                   </form>
                 </div>
@@ -682,15 +744,16 @@
           </div>
 
 
-          <div class="container" id="inspectorBuyerAkw" style="display: none">
+          <div class="container" id="inspectorBuyerAkw" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Acknowlege Inspection by Buyers</h4>
-                <div class="container">
+                <br/>
+                <div class="container-body">
                   <form>
-                    <label for="lcAdd7">Letter Of Credit Address:</label>
+                    <label for="lcAdd7" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd7">
-                    <button class="btn btn-default btn-inspectorBuyerAkw" input type="submit"> Aknowledge Inspection </button>
+                    <button class="btn btn-info btn-inspectorBuyerAkw" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Aknowledge Inspection </button>
                     <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
@@ -700,17 +763,18 @@
             </div>
           </div>
 
-          <div class="container" id="exporterRepayLoan" style="display: none">
+          <div class="container" id="exporterRepayLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Repaying the Loan</h4>
-                  <div class="container">
+                  <h4 class="card-title" >Repaying the Loan</h4>
+                  <br/>
+                  <div class="container-body">
                     <form>
-                      <label for="lcAdd13">Loan Smart Contract Address:</label>
+                      <label for="lcAdd13" style="font-weight:bold">Loan Smart Contract Address:</label>
                       <input type="text" id="lcAdd13">
-                      <label for="issuingAmt"> Enter the Repaying Amount </label>
+                      <label for="issuingAmt" style="font-weight:bold"> Enter the Repaying Amount </label>
                       <input type="text" id="repayAmt">
-                      <button class="btn btn-default btn-repayLoan" input type="submit"> Repay the Loan </button>
+                      <button class="btn btn-default btn-repayLoan" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Repay the Loan </button>
                       <p id="loanRepaid" style="font-family:Noto Sans; font-size:22px"></p>
                       <br>
                     </form>
@@ -719,19 +783,21 @@
               </div>
             </div>
 
-            <div class="container" id="releasingLoan" style="display: none">
+            <div class="container" id="releasingLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Release the Loan</h4>
-                        <div class="container">
+                        <br/>
+                        <div class="container-body">
                           <form>
-                            <button class="btn btn-default btn-loanDetails" input type="submit"> View Loan Details </button>
+                            <button class="btn btn-info btn-loanDetails" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> View Loan Details </button>
+                            <div style="border:1px solid gray;margin-top:30px;"></div>
                             <p id="reviewLoanDetails"></p>
-                            <label for="lcAdd12">Loan Address:</label>
+                            <label for="lcAdd12" style="font-weight:bold">Loan Address:</label>
                             <input type="text" id="lcAdd12">
-                            <label for="issuingAmt"> Enter the Loan Amount </label>
+                            <label for="issuingAmt" style="font-weight:bold"> Enter the Loan Amount </label>
                             <input type="text" id="issuingAmt">
-                            <button class="btn btn-default btn-issueLoan" input type="submit"> Release the Loan </button>
+                            <button class="btn btn-default btn-issueLoan" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#4CAF50;color:white;font-size: larger;padding:10px 20px"> Release the Loan </button>
                             <p id="issueLoanP" style="font-family:Noto Sans; font-size:22px"></p>
                             <br>
                           </form>
@@ -741,11 +807,12 @@
               </div>
 
 
-            <div class="container" id="repayingtheLoan" style="display: none">
+            <!--<div class="container" id="repayingtheLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Release the Loan</h4>
-                        <div class="container">
+                        <br/>
+                        <div class="container-body">
                           <form>
                             <button class="btn btn-default btn-loanDetails" input type="submit"> View Loan Details </button>
                             <p id="reviewLoanDetails"></p>
@@ -760,7 +827,7 @@
                         </div>
                       </div>
                 </div>
-              </div>
+              </div>-->
 
         </div>
       </div>
@@ -886,6 +953,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#exporterUI').hide();
   });
 
   $('#acceptInspectionIcon').on('click', function () {
@@ -906,6 +974,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#inspectorUI').hide();
   });
 
   $('#completeInspectionIcon').on('click', function () {
@@ -926,6 +995,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#inspectorUI').hide();
   });
 
   $('#requestShipmentIcon').on('click', function () {
@@ -946,6 +1016,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#exporterUI').hide();
   });
 
   $('#acceptShipmentIcon').on('click', function () {
@@ -966,6 +1037,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#shipperUI').hide();
 
   });
 
@@ -987,6 +1059,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#shipperUI').hide();
   });
 
   $('#makePaymentIcon').on('click', function () {
@@ -1027,6 +1100,7 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#inspectorUI').hide();
   });
 
   $('#applyLoanIcon').on('click', function () {
@@ -1047,6 +1121,7 @@
     $('#exporterRepayLoan').hide();  
     $('#releasingLoan').hide();  
     $('#bidForLoan').hide();
+    $('#exporterUI').hide();
   });
 
   $('#bidLoan').on('click', function () {
@@ -1087,6 +1162,7 @@
     $('#releasingLoan').hide();
     $('#exporterRepayLoan').hide(); 
     $('#applyLoanForm').hide();
+    $('#exporterUI').hide();
   }); 
 
    $('#releaseLoan').on('click', function () {
@@ -1128,6 +1204,7 @@
     $('#releasingLoan').hide();
     $('#exporterRepayLoan').show(); 
     $('#applyLoanForm').hide();
+    $('#exporterUI').hide();
   });
 
   
