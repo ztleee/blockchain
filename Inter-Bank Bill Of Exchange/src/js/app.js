@@ -59,6 +59,7 @@ App = {
         $(document).on('click', '.btn-processWinningBid', App.processWinningBid);
         $(document).on('click', '.btn-loanDetails', App.loanDetails);
         $(document).on('click', '.btn-issueLoan', App.issueLoan);
+        $(document).on('click', '.btn-repayLoan', App.repayLoan);
     },
 
     createBoe: function (event) {
