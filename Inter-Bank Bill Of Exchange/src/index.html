@@ -770,6 +770,8 @@
                   <br/>
                   <div class="container-body">
                     <form>
+                      <button class="btn btn-default btn-getAmtToPay" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Get the Amount to Repay </button>
+                      <p id="amtNeedtoRepay" style="font-family:Noto Sans; font-size:22px"></p>
                       <label for="lcAdd13" style="font-weight:bold">Loan Smart Contract Address:</label>
                       <input type="text" id="lcAdd13">
                       <label for="issuingAmt" style="font-weight:bold"> Enter the Repaying Amount </label>
@@ -855,6 +857,24 @@
 <script type="text/javascript">window.loop11ExtTerritory = true;</script>
 
 <script>
+  // putting address into other same fields 
+  $('#lcAdd').change(function() {
+    $('#lcAdd1').val($(this).val());
+    $('#lcAdd2').val($(this).val());
+    $('#lcAdd3').val($(this).val());
+    $('#lcAdd4').val($(this).val());
+    $('#lcAdd5').val($(this).val());
+    $('#lcAdd6').val($(this).val());
+    $('#lcAdd7').val($(this).val());
+    $('#lcAdd8').val($(this).val());
+    $('#lcAdd9').val($(this).val());
+  });
+
+  $('#lcAdd10').change(function() {
+    $('#lcAdd11').val($(this).val());
+    $('#lcAdd12').val($(this).val());
+    $('#lcAdd13').val($(this).val());
+  });
 
   // side bar javascript
   $('.picInactive').on('click', function () {

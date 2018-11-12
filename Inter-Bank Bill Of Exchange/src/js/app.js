@@ -60,6 +60,7 @@ App = {
         $(document).on('click', '.btn-loanDetails', App.loanDetails);
         $(document).on('click', '.btn-issueLoan', App.issueLoan);
         $(document).on('click', '.btn-repayLoan', App.repayLoan);
+        $(document).on('click', '.btn-getAmtToPay', App.getAmtToPay);
     },
 
     createBoe: function (event) {
@@ -446,8 +447,11 @@ App = {
                     LoanInstance.retrieveLoaningBank().then(function (result1) {
                         LoanInstance.retrieveLoanAmount().then(function (result2) {
                             LoanInstance.retrieveBiddingStatus().then(function (result3) {
-                                document.getElementById("winningBank").innerHTML = "Winning Bank is: " + result1
-                                    + "<br>Total Amount Loan for Payment: $" + result2 + "<br>Bidding Status: " + result3;
+                                LoanInstance.retrieveInterestRate().then(function (result4) {
+                                    document.getElementById("winningBank").innerHTML = "Winning Bank is: " + result1
+                                        + "<br>Total Amount Loan for Payment: $" + result2 + "<br>Bidding Status: " + result3 
+                                        + "<br> Interest Rate: " + result4;
+                                });
                             });
                         });
                     });
@@ -531,6 +535,30 @@ App = {
                         document.getElementById("loanRepaid").innerHTML = "Repaying Loan Status: " + result1;
                     });
                 });
+
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
+    getAmtToPay: function (event) {
+        event.preventDefault();
+
+        var LoanInstance;
+        var address = document.getElementById("lcAdd13").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.Loan.at(address).then(function (instance) {
+                LoanInstance = instance;
+                    LoanInstance.retrieveRepaymentAmount().then(function (result) {
+                        document.getElementById("amtNeedtoRepay").innerHTML = "Amount to repay: " + result;
+                        
+                    });
 
             }).catch(function (err) {
                 console.log(err.message);

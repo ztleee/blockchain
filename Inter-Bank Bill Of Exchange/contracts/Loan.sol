@@ -162,6 +162,10 @@ contract Loan is Ownable {
 	function retrievePaid() public view returns  (bool){
         return winningBid.paid;
     }
+
+    function retrieveInterestRate() public view returns  (bool){
+        return winningBid.interestRate;
+    }
 	
 	
 
