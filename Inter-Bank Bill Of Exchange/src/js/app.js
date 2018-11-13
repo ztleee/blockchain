@@ -169,16 +169,18 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.assignInspectionSeller(inspaddress).then(function () {
-                    LetterOfCreditInstance.getinspectorForSeller().then(function (result) {
-                        document.getElementById("assignInspSeller").innerHTML = "Inspector for Seller: " + result;
-                        LetterOfCreditInstance.requestInspection().then(function () {
-                            LetterOfCreditInstance.getInspectionForExporterStatus().then(function (result) {
-                                document.getElementById("inspectionStatusSeller").innerHTML = "Inspection Status: " + result;
+                
+                    
+                       
+                        LetterOfCreditInstance.requestInspection(inspaddress).then(function () {
+                            LetterOfCreditInstance.getinspectorForSeller().then(function (result) {
+                            LetterOfCreditInstance.getInspectionForExporterStatus().then(function (result1) {
+                                document.getElementById("assignInspSeller").innerHTML = "Inspector for Seller: " + result;
+                                document.getElementById("inspectionStatusSeller").innerHTML = "Inspection Status: " + result1;
                             });
                         });
                     });
-                });
+                
 
             }).catch(function (err) {
                 console.log(err.message);
