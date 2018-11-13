@@ -84,41 +84,41 @@ contract Loan is Ownable {
 
 
     function issueLoan() public payable{
+
+        uint256 etherVal = SafeMath.mul(msg.value, 1 ether);
+
         if(!equal(biddingStatus,biddingStatusArray[1])){
             revert(errMsg[0]);
         }else if(winningBid.issued){
             revert(errMsg[0]);
-        }else if(msg.sender != winningBid.loaningBank){
+        }else if(etherVal != winningBid.loaningBank){
             revert(errMsg[0]);
-        }else if(msg.value != loanAmount){
+        }else if(etherVal != loanAmount){
             revert(errMsg[1]);
         }
         
         
-        exporter.transfer(msg.value); //xfer loan to exporter
+        exporter.transfer(etherVal); //xfer loan to exporter
         winningBid.issued = true; //set issued to true
   
     }
     
     function repayLoan() public payable{
+
+        uint256 etherVal = SafeMath.mul(msg.value, 1 ether);
+
         if(msg.sender != exporter){
             revert(errMsg[0]);
         }else if(winningBid.paid){
             revert(errMsg[0]);
-        }else if(msg.value != SafeMath.add(loanAmount, winningBid.interestRate)){
+        }else if( etherVal != SafeMath.add(loanAmount, winningBid.interestRate)){
             revert(errMsg[1]);
         }
         
-        winningBid.loaningBank.transfer(msg.value);
+        winningBid.loaningBank.transfer(etherVal);
         winningBid.paid = true;
         
     }
-    
-    uint256 data;
-    function testFunc(uint256 interest) public payable{
-        data = interest;
-    }
-    
     
         
     //Getters - constant doesn't modifiy state
@@ -163,7 +163,7 @@ contract Loan is Ownable {
         return winningBid.paid;
     }
 
-    function retrieveInterestRate() public view returns  (bool){
+    function retrieveInterestRate() public view returns  (uint256){
         return winningBid.interestRate;
     }
 	
