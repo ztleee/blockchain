@@ -96,9 +96,14 @@ contract LetterOfCredit is Ownable{
         boe.holder = exporter;
     }
 
-   
     /// Exporter requests inspection ///
-    function requestInspection() public {
+    function assignInspectionSeller() public {
+        require(msg.sender==exporter,errMsg[0]);
+        
+    }
+
+    /// Exporter requests inspection ///
+    function requestInspection(address sellerInspector) public {
         require(msg.sender==exporter,errMsg[0]);
         inspectionForExporterStatus=inspectionForExporterStatusArray[0];
         inspectorForSeller=sellerInspector;
