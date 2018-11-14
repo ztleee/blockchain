@@ -61,6 +61,7 @@ App = {
         $(document).on('click', '.btn-issueLoan', App.issueLoan);
         $(document).on('click', '.btn-repayLoan', App.repayLoan);
         $(document).on('click', '.btn-getAmtToPay', App.getAmtToPay);
+        $(document).on('click', '.btn-retrieveLoan', App.retrieveLoan);
     },
 
     createBoe: function (event) {
@@ -376,6 +377,31 @@ App = {
         });
     },
 
+    retrieveLoan: function (event) {
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd20").value;
+  
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.retrieveRepaymentAmount().then(function (result) {
+                   
+                    document.getElementById("retrieveLoan").innerHTML = "Loan Amt : " + result;
+                });
+
+            }).catch(function (err) {
+                console.log(err.message);
+            });
+        });
+    },
+
 
 
     createLoan: function (event) {
@@ -396,7 +422,7 @@ App = {
                 LoanInstance = instance;
                 return LoanInstance.createLoan(exporterLoan, loanAmt, lcAdd).then(function () {
                     LoanInstance.retrieveBiddingStatus().then(function (result) {
-                        document.getElementById("biddingStatus").innerHTML = "Bidding Status: " + result;
+                        document.getElementById("biddingStatus").innerHTML = "Contract "+ LoanInstance.address+" Bidding Status: " + result;
                     });
 
                 });

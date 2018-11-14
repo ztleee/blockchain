@@ -311,6 +311,15 @@
                         </h5>
                       </div>
                     </div>
+                    <div class="card" id="retrieveLoanIcon" style="margin-left:20px">
+                      <img src="images/payment.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                    <div class="card " style="background-color:#A68059">
+                      <h5 style="margin-left:30px;padding:5px;">
+                        <b>Retrieve Loan Amt</b>
+                      </h5>
+                    </div>
+                  </div>
+
                   </div>
                 </div>
               </div>
@@ -609,6 +618,26 @@
             </div>
           </div>
 
+          <div class="container" id="retrieveLoanForm" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Retrieve Loan</h4>
+                <br/>
+                <div class="container-body">
+                  <form>
+                    <label for="lcAdd20" style="font-weight:bold">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd20">
+    
+                    <button class="btn btn-default btn-retrieveLoan" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Submit </button>
+                    <p id="retrieveLoan" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="container" id="applyLoanForm" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
               <div class="card-body">
@@ -618,12 +647,13 @@
                   <form>
                     <label for="lcAdd9" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd9">
-                    <label for="lcAdd8" style="font-weight:bold">Expoter Address / Borrower Address:</label>
+                    <label for="lcAdd8" style="font-weight:bold">Exporter Address / Borrower Address:</label>
                     <input type="text" id="exporterLoan">
                     <label for="lcAdd8" style="font-weight:bold">Loan Amount:</label>
                     <input type="text" id="loanAmount">
                     <button class="btn btn-info btn-createLoan" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Apply for a Loan </button>
                     <p id="biddingStatus" style="font-family:Noto Sans; font-size:22px"></p>
+                    
                     <br>
                   </form>
                 </div>
@@ -1101,6 +1131,26 @@
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
+  });
+
+    $('#retrieveLoanIcon').on('click', function () {
+      $('#retrieveLoanForm').show();
+      $('#overview').hide();
+      $('#details').show();
+      $('#acceptShipment').hide();
+      $('#requestShipmentForm').hide();
+      $('#completeInspectSeller').hide();
+      $('#applyLc').hide();
+      $('#acceptLc').hide();
+      $('#inspectRequestSeller').hide();
+      $('#acceptInspectSeller').hide();
+      $('#completeShipment').hide();
+      $('#inspectorBuyerAkw').hide();
+      $('#exporterStopBidding').hide();
+      $('#exporterRepayLoan').hide();
+      $('#releasingLoan').hide();
+      $('#bidForLoan').hide(); 
+      $('#applyLoanForm').hide();
   });
 
   $('#inspectorBuyerAkwIcon').on('click', function () {

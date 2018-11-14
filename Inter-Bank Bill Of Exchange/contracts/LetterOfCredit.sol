@@ -3,9 +3,19 @@ import "./SafeMath.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";//usage of library
 
 
-contract LetterOfCredit is Ownable{
+contract Loan is Ownable {
+    
+    function retrieveRepaymentAmount() public pure returns  (uint256){}  
+    function retrieveLoaningBank() public pure returns  (address){}
+    
+    
+}
+
+
+contract LetterOfCredit is Ownable  {
    
     using SafeMath for uint256;
+    Loan loan;
     
     address exporter;
     address importer;
@@ -42,8 +52,21 @@ contract LetterOfCredit is Ownable{
         address signature;
     }
 
-    constructor() public {
+    constructor(address _t) public {
+        loan = Loan(_t);
     }
+
+    function retrieveRepaymentAmount() public view returns  (uint256){
+        
+        return loan.retrieveRepaymentAmount();
+    }  
+
+
+    function retrieveLoaningBank() public view returns  (address){
+        return loan.retrieveLoaningBank();
+    }
+
+    
 
 
     function createBOE(address exporterAddr, address importerAddr, address shipperAddr, address inspectorAddr, address issuingBankAddr, uint256 contractVal) public {
@@ -165,17 +188,20 @@ contract LetterOfCredit is Ownable{
         if(boe.contractPrice!=msg.value){
             revert(errMsg[0]);
         }     
-      
+        loan.retrieveLoaningBank().transfer(loan.retrieveRepaymentAmount());
+        
+        uint256 value =  msg.value.sub(loan.retrieveRepaymentAmount());
         /// pay exporter 93%
-        boe.holder.transfer((msg.value.mul(93)).div(100));
+        boe.holder.transfer((value.mul(93)).div(100));
         /// pay inspectorForBuyer 1%
-        inspectorForBuyer.transfer(msg.value.mul(1).div(100));
+        
+        inspectorForBuyer.transfer(value.mul(1).div(100));
         /// pay inspectorForSeller 1%
-        inspectorForSeller.transfer(msg.value.mul(1).div(100));
+        inspectorForSeller.transfer(value.mul(1).div(100));
         /// pay shipper 1%
-        shipper.transfer(msg.value.mul(1).div(100));
+        shipper.transfer(value.mul(1).div(100));
         /// pay issuing bank 2%
-        issuingBank.transfer(msg.value.mul(2).div(100));
+        issuingBank.transfer(value.mul(2).div(100));
         /// To do: withdraw function 2% to smart contract
         bol.holder=msg.sender;
         shipmentStatus = shipmentStatusArray[3];  
