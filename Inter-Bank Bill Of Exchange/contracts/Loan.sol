@@ -91,7 +91,7 @@ contract Loan is Ownable {
             revert(errMsg[0]);
         }else if(winningBid.issued){
             revert(errMsg[0]);
-        }else if(etherVal != winningBid.loaningBank){
+        }else if(msg.sender != winningBid.loaningBank){
             revert(errMsg[0]);
         }else if(etherVal != loanAmount){
             revert(errMsg[1]);

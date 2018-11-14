@@ -97,10 +97,10 @@ contract LetterOfCredit is Ownable{
     }
 
     /// Exporter requests inspection ///
-    function assignInspectionSeller() public {
-        require(msg.sender==exporter,errMsg[0]);
+    // function assignInspectionSeller() public {
+    //     require(msg.sender==exporter,errMsg[0]);
         
-    }
+    // }
 
     /// Exporter requests inspection ///
     function requestInspection(address sellerInspector) public {
