@@ -362,7 +362,7 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.makePayment({ "value": payAmount }).then(function () {
+                LetterOfCreditInstance.makePayment({ value: payAmount }).then(function () {
                     LetterOfCreditInstance.getBOLHolder().then(function (result) {
                         document.getElementById("bolOwnerCollect").innerHTML = "BOL current Owner : " + result;
                         LetterOfCreditInstance.getShipmentStatus().then(function (result) {
