@@ -103,21 +103,9 @@ contract Loan is Ownable {
   
     }
     
-    function repayLoan() public payable{
-
-        uint256 etherVal = SafeMath.mul(msg.value, 1 ether);
-
-        if(msg.sender != exporter){
-            revert(errMsg[0]);
-        }else if(winningBid.paid){
-            revert(errMsg[0]);
-        }else if( etherVal != SafeMath.add(loanAmount, winningBid.interestRate)){
-            revert(errMsg[1]);
-        }
-        
-        winningBid.loaningBank.transfer(etherVal);
+    function repayLoan() public payable returns (bool){
         winningBid.paid = true;
-        
+        return true;
     }
     
         

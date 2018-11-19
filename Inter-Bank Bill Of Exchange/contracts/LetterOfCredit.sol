@@ -7,6 +7,7 @@ contract Loan is Ownable {
     
     function retrieveRepaymentAmount() public pure returns  (uint256){}  
     function retrieveLoaningBank() public pure returns  (address){}
+    function repayLoan() public payable returns (bool) {}
     
     
 }
@@ -64,6 +65,12 @@ contract LetterOfCredit is Ownable  {
 
     function retrieveLoaningBank() public view returns  (address){
         return loan.retrieveLoaningBank();
+    }
+
+    function repayLoan() public payable returns (bool){
+        loan.repayLoan();
+        return true;
+        
     }
 
     
@@ -187,6 +194,7 @@ contract LetterOfCredit is Ownable  {
             revert(errMsg[0]);
         }     
         loan.retrieveLoaningBank().transfer(loan.retrieveRepaymentAmount());
+        
         /// uint256 value = SafeMath.mul(msg.value, 1 ether); // Stores ether value as wei 
         uint256 value =  msg.value.sub(loan.retrieveRepaymentAmount());
         /// pay exporter 93%
@@ -201,6 +209,8 @@ contract LetterOfCredit is Ownable  {
         /// pay issuing bank 2%
         issuingBank.transfer((value.mul(2)).div(100));
         /// To do: withdraw function 2% to smart contract
+        loan.repayLoan();
+
         bol.holder=msg.sender;
         shipmentStatus = shipmentStatusArray[3];  
         ///emit PaymentMade(msg.value, msg.sender);
