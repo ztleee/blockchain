@@ -67,8 +67,6 @@ contract LetterOfCredit is Ownable  {
     }
 
     
-
-
     function createBOE(address exporterAddr, address importerAddr, address shipperAddr, address inspectorAddr, address issuingBankAddr, uint256 contractVal) public {
         
         shipmentStatusArray = ["Pending Shipment", "In Port", "Ship out", "Collected"];
@@ -98,7 +96,7 @@ contract LetterOfCredit is Ownable  {
         
         boe = BillOfExchange({
             holder: 0,
-            contractPrice: contractVal
+            contractPrice: contractPrice
         });
         
         coiFromExporter = CertificateOfInspection({
@@ -189,19 +187,19 @@ contract LetterOfCredit is Ownable  {
             revert(errMsg[0]);
         }     
         loan.retrieveLoaningBank().transfer(loan.retrieveRepaymentAmount());
-        
+        /// uint256 value = SafeMath.mul(msg.value, 1 ether); // Stores ether value as wei 
         uint256 value =  msg.value.sub(loan.retrieveRepaymentAmount());
         /// pay exporter 93%
         boe.holder.transfer((value.mul(93)).div(100));
         /// pay inspectorForBuyer 1%
         
-        inspectorForBuyer.transfer(value.mul(1).div(100));
+        inspectorForBuyer.transfer((value.mul(1)).div(100));
         /// pay inspectorForSeller 1%
-        inspectorForSeller.transfer(value.mul(1).div(100));
+        inspectorForSeller.transfer((value.mul(1)).div(100));
         /// pay shipper 1%
-        shipper.transfer(value.mul(1).div(100));
+        shipper.transfer((value.mul(1)).div(100));
         /// pay issuing bank 2%
-        issuingBank.transfer(value.mul(2).div(100));
+        issuingBank.transfer((value.mul(2)).div(100));
         /// To do: withdraw function 2% to smart contract
         bol.holder=msg.sender;
         shipmentStatus = shipmentStatusArray[3];  

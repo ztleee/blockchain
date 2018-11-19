@@ -354,6 +354,7 @@ App = {
         var LetterOfCreditInstance;
         var address = document.getElementById("lcAdd8").value;
         var payAmount = document.getElementById("payAmount").value;
+        var value = web3.toWei(payAmount,"ether")
 
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
@@ -362,7 +363,7 @@ App = {
 
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.makePayment({ value: payAmount }).then(function () {
+                LetterOfCreditInstance.makePayment({ value: value }).then(function () {
                     LetterOfCreditInstance.getBOLHolder().then(function (result) {
                         document.getElementById("bolOwnerCollect").innerHTML = "BOL current Owner : " + result;
                         LetterOfCreditInstance.getShipmentStatus().then(function (result) {
