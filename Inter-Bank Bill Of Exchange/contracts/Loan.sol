@@ -34,7 +34,7 @@ contract Loan is Ownable {
         
     }
         
-    function createLoan(address exporterAddr, uint256 loanAmountVal, address letterOfCreditAddr) public{
+    function createLoan(address exporterAddr, uint256 loanAmountVal) public{
         biddingStatusArray = ["Started","Closed"];
         errMsg = [
                 "Unauthorized Transaction",//0
@@ -44,7 +44,6 @@ contract Loan is Ownable {
                 "Unauthorized Command"     //4
             ];
         exporter = exporterAddr;
-        letterOfCredit = letterOfCreditAddr; //removed temporary for easy testing..
         loanAmount = SafeMath.mul(loanAmountVal, 1 ether);
         biddingStatus = biddingStatusArray[0];
      
@@ -85,20 +84,18 @@ contract Loan is Ownable {
 
     function issueLoan() public payable{
 
-        uint256 etherVal = SafeMath.mul(msg.value, 1 ether);
-
         if(!equal(biddingStatus,biddingStatusArray[1])){
             revert(errMsg[0]);
         }else if(winningBid.issued){
             revert(errMsg[0]);
         }else if(msg.sender != winningBid.loaningBank){
             revert(errMsg[0]);
-        }else if(etherVal != loanAmount){
+        }else if(msg.value != loanAmount){
             revert(errMsg[1]);
         }
         
         
-        exporter.transfer(etherVal); //xfer loan to exporter
+        exporter.transfer(msg.value); //xfer loan to exporter
         winningBid.issued = true; //set issued to true
   
     }

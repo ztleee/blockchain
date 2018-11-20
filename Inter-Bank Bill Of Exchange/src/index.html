@@ -311,15 +311,6 @@
                         </h5>
                       </div>
                     </div>
-                    <div class="card" id="retrieveLoanIcon" style="margin-left:20px">
-                      <img src="images/payment.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
-                    <div class="card " style="background-color:#A68059">
-                      <h5 style="margin-left:30px;padding:5px;">
-                        <b>Retrieve Loan Amt</b>
-                      </h5>
-                    </div>
-                  </div>
-
                   </div>
                 </div>
               </div>
@@ -341,7 +332,7 @@
                       </div>
                     </div>
                     <div class="card" id="bidLoan">
-                      <img src="images/bidding.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
+                      <img src="images/bidding.png" style="width:300px;height:300px;padding:30px;margin-top:10px">
                       <div class="card bg-info">
                         <h5 style="margin-left:75px;padding:5px;">
                           <b>Bid for the loan</b>
@@ -352,7 +343,7 @@
                       <img src="images/accpect.png"  style="width:300px;height:300px;padding:20px;margin-top:10px">
                       <div class="card" style="background-color:#45a049 ">
                         <h5 style="margin-left:75px;padding:5px;">
-                          <b>Release the Loan</b>
+                          <b>Issue the Loan</b>
                         </h5>
                       </div>
                     </div>
@@ -404,14 +395,6 @@
                         </h5>
                       </div>
                     </div>
-                    <div class="card" id="RepayLoan">
-                        <img src="images/cash.png"  style="width:300px;height:300px;padding:30px;margin-top:10px">
-                        <div class="card " style="background-color:#A68059">
-                          <h5 style="margin-left:65px;padding:5px;">
-                            <b> Repaying the Loan </b>
-                          </h5>
-                        </div>
-                      </div>
                   </div>
                 </div>
               </div>
@@ -618,25 +601,7 @@
             </div>
           </div>
 
-          <div class="container" id="retrieveLoanForm" style="display: none;margin-top:100px;margin-bottom:20px;margin-left:270px">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Retrieve Loan</h4>
-                <br/>
-                <div class="container-body">
-                  <form>
-                    <label for="lcAdd20" style="font-weight:bold">Letter Of Credit Address:</label>
-                    <input type="text" id="lcAdd20">
-    
-                    <button class="btn btn-default btn-retrieveLoan" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Submit </button>
-                    <p id="retrieveLoan" style="font-family:Noto Sans; font-size:22px"></p>
-                    <br>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      
 
           <div class="container" id="applyLoanForm" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
             <div class="card">
@@ -645,8 +610,6 @@
                 <br/>
                 <div class="container-body">
                   <form>
-                    <label for="lcAdd9" style="font-weight:bold">Letter Of Credit Address:</label>
-                    <input type="text" id="lcAdd9">
                     <label for="lcAdd8" style="font-weight:bold">Exporter Address / Borrower Address:</label>
                     <input type="text" id="exporterLoan">
                     <label for="lcAdd8" style="font-weight:bold">Loan Amount:</label>
@@ -668,13 +631,21 @@
                 <br/>
                 <div class="container-body">
                   <form>
+                    <label for="lcAdd20" style="font-weight:bold">Letter Of Credit Address:</label>
+                    <input type="text" id="lcAdd20">
+                    <button class="btn btn-default btn-viewDetails2" input type="submit" style="font-weight:bold;background-color: darkgoldenrod;color:white;font-size: larger;padding:10px 20px">View Details </button>
+                    <p id="acceptLcConPrice2" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="acceptLcExporter2" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="acceptLcImporter2" style="font-family:Noto Sans; font-size:22px"></p>
+                    <p id="currentBOE2" style="font-family:Noto Sans; font-size:22px"></p>
+                    <br>
                     <label for="lcAdd10" style="font-weight:bold">Loan Smart Contract Address:</label>
                     <input type="text" id="lcAdd10">
                     <label for="lcAdd8" style="font-weight:bold"> Interest Rate: </label>
                     <input type="text" id="intAmount">
                     <button class="btn btn-info btn-bidForLoan" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Bid now </button>
                     <p id="bidByBank" style="font-family:Noto Sans; font-size:22px"></p>
-                    <br>
+               
                   </form>
                 </div>
               </div>
@@ -783,7 +754,7 @@
                   <form>
                     <label for="lcAdd7" style="font-weight:bold">Letter Of Credit Address:</label>
                     <input type="text" id="lcAdd7">
-                    <button class="btn btn-info btn-inspectorBuyerAkw" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Aknowledge Inspection </button>
+                    <button class="btn btn-info btn-inspectorBuyerAkw" input type="submit" style="margin-left:5px;font-weight:bold;color:white;font-size: larger;padding:10px 20px"> Acknowledge Inspection </button>
                     <p id="inspectionBuyerCoi" style="font-family:Noto Sans; font-size:22px"></p>
                     <p id="inspectionBuyerCoiSig" style="font-family:Noto Sans; font-size:22px"></p>
                     <br>
@@ -792,28 +763,6 @@
               </div>
             </div>
           </div>
-
-          <div class="container" id="exporterRepayLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title" >Repaying the Loan</h4>
-                  <br/>
-                  <div class="container-body">
-                    <form>
-                      <button class="btn btn-default btn-getAmtToPay" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Get the Amount to Repay </button>
-                      <p id="amtNeedtoRepay" style="font-family:Noto Sans; font-size:22px"></p>
-                      <label for="lcAdd13" style="font-weight:bold">Loan Smart Contract Address:</label>
-                      <input type="text" id="lcAdd13">
-                      <label for="issuingAmt" style="font-weight:bold"> Enter the Repaying Amount </label>
-                      <input type="text" id="repayAmt">
-                      <button class="btn btn-default btn-repayLoan" input type="submit" style="margin-left:5px;font-weight:bold;background-color:#A68059;color:white;font-size: larger;padding:10px 20px"> Repay the Loan </button>
-                      <p id="loanRepaid" style="font-family:Noto Sans; font-size:22px"></p>
-                      <br>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="container" id="releasingLoan" style="display: none;margin-top:80px;margin-bottom:20px;margin-left:270px">
                 <div class="card">
@@ -979,7 +928,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide();    
     $('#applyLoanForm').hide();
@@ -1000,7 +948,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1021,7 +968,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1042,7 +988,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1063,7 +1008,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1084,7 +1028,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1106,7 +1049,6 @@
     $('#collectAndPayment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1127,30 +1069,9 @@
     $('#completeShipment').hide();
     $('#inspectorBuyerAkw').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
-  });
-
-    $('#retrieveLoanIcon').on('click', function () {
-      $('#retrieveLoanForm').show();
-      $('#overview').hide();
-      $('#details').show();
-      $('#acceptShipment').hide();
-      $('#requestShipmentForm').hide();
-      $('#completeInspectSeller').hide();
-      $('#applyLc').hide();
-      $('#acceptLc').hide();
-      $('#inspectRequestSeller').hide();
-      $('#acceptInspectSeller').hide();
-      $('#completeShipment').hide();
-      $('#inspectorBuyerAkw').hide();
-      $('#exporterStopBidding').hide();
-      $('#exporterRepayLoan').hide();
-      $('#releasingLoan').hide();
-      $('#bidForLoan').hide(); 
-      $('#applyLoanForm').hide();
   });
 
   $('#inspectorBuyerAkwIcon').on('click', function () {
@@ -1167,7 +1088,6 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();
     $('#releasingLoan').hide();
     $('#bidForLoan').hide(); 
     $('#applyLoanForm').hide();
@@ -1188,11 +1108,10 @@
     $('#completeShipment').hide();
     $('#collectAndPayment').hide();
     $('#applyLoanForm').show();
-    $('#exporterStopBidding').hide();
-    $('#exporterRepayLoan').hide();  
     $('#releasingLoan').hide();  
     $('#bidForLoan').hide();
     $('#exporterUI').hide();
+    $('#exporterStopBidding').hide();
   });
 
   $('#bidLoan').on('click', function () {
@@ -1211,7 +1130,6 @@
     $('#bidForLoan').show();
     $('#exporterStopBidding').hide();
     $('#releasingLoan').hide();
-    $('#exporterRepayLoan').hide(); 
     $('#applyLoanForm').hide();
   });
 
@@ -1231,7 +1149,6 @@
     $('#bidForLoan').hide();
     $('#exporterStopBidding').show();
     $('#releasingLoan').hide();
-    $('#exporterRepayLoan').hide(); 
     $('#applyLoanForm').hide();
     $('#exporterUI').hide();
   }); 
@@ -1251,8 +1168,7 @@
     $('#inspectorBuyerAkw').hide();
     $('#bidForLoan').hide();
     $('#exporterStopBidding').hide();
-    $('#releasingLoan').show();
-    $('#exporterRepayLoan').hide(); 
+    $('#releasingLoan').show(); 
     $('#applyLoanForm').hide();
   });
  
@@ -1273,7 +1189,6 @@
     $('#bidForLoan').hide();
     $('#exporterStopBidding').hide();
     $('#releasingLoan').hide();
-    $('#exporterRepayLoan').show(); 
     $('#applyLoanForm').hide();
     $('#exporterUI').hide();
   });
@@ -1296,7 +1211,6 @@
     $('#bidForLoan').hide();
     $('#exporterStopBidding').hide();
     $('#releasingLoan').hide();
-    $('#exporterRepayLoan').hide(); 
     $('#applyLoanForm').hide();
   });
 

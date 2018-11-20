@@ -45,6 +45,7 @@ App = {
     bindEvents: function () {
         $(document).on('click', '.btn-create', App.createBoe);
         $(document).on('click', '.btn-viewDetails', App.getDetails);
+        $(document).on('click', '.btn-viewDetails2', App.getDetails2);
         $(document).on('click', '.btn-accept', App.issueLetterOfCredit);
         $(document).on('click', '.btn-requestInspSeller', App.assignInspectionSeller);
         $(document).on('click', '.btn-acceptInspectSeller', App.acceptInspectSeller);
@@ -61,7 +62,6 @@ App = {
         $(document).on('click', '.btn-issueLoan', App.issueLoan);
         $(document).on('click', '.btn-repayLoan', App.repayLoan);
         $(document).on('click', '.btn-getAmtToPay', App.getAmtToPay);
-        $(document).on('click', '.btn-retrieveLoan', App.retrieveLoan);
     },
 
     createBoe: function (event) {
@@ -112,8 +112,8 @@ App = {
             App.contracts.LetterOfCredit.at(address).then(function (instance) {
                 LetterOfCreditInstance = instance;
                 LetterOfCreditInstance.getcontractPrice().then(function (result) {
-
-                    document.getElementById("acceptLcConPrice").innerHTML = "Contract price: " + result.toNumber();
+                    result =web3.fromWei(result, 'ether')
+                    document.getElementById("acceptLcConPrice").innerHTML = "Contract price: " + result + " ether";
                 });
                 LetterOfCreditInstance.getExporter().then(function (result) {
 
@@ -128,6 +128,40 @@ App = {
                 });
             }).catch(function (err) {
                 document.getElementById("acceptLcConPrice").innerHTML = err.message;
+            });
+        });
+    },
+
+    getDetails2: function (event) {
+        event.preventDefault();
+
+        var LetterOfCreditInstance;
+        var address = document.getElementById("lcAdd20").value;
+
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+
+            App.contracts.LetterOfCredit.at(address).then(function (instance) {
+                LetterOfCreditInstance = instance;
+                LetterOfCreditInstance.getcontractPrice().then(function (result) {
+                    result =web3.fromWei(result, 'ether')
+                    document.getElementById("acceptLcConPrice2").innerHTML = "Contract price: " + result + " ether";
+                });
+                LetterOfCreditInstance.getExporter().then(function (result) {
+
+                    document.getElementById("acceptLcExporter2").innerHTML = "Exporter: " + result;
+                });
+                LetterOfCreditInstance.getImporter().then(function (result) {
+                    LetterOfCreditInstance.getBOEHolder().then(function (result) {
+                        document.getElementById("currentBOE2").innerHTML = "BOE holder: " + result;
+                    });
+
+                    document.getElementById("acceptLcImporter2").innerHTML = "Importer: " + result;
+                });
+            }).catch(function (err) {
+                document.getElementById("acceptLcConPrice2").innerHTML = err.message;
             });
         });
     },
@@ -230,7 +264,7 @@ App = {
                 LetterOfCreditInstance.certifyCertOfInspectionForExporter().then(function () {
                     LetterOfCreditInstance.getcoiFromExporterCertified().then(function (result) {
                         LetterOfCreditInstance.getcoiFromExporterSignature().then(function (result1) {
-                            document.getElementById("completeInspectSellerP").innerHTML = "Certificate of Inspection signed?: " + result + "Signature of Certificate of Inspection (Seller): " + result1;
+                            document.getElementById("completeInspectSellerP").innerHTML = "Certificate of Inspection signed?: " + result + " Signature of Certificate of Inspection (Seller): " + result1;
 
                         });
                     });
@@ -378,38 +412,10 @@ App = {
         });
     },
 
-    retrieveLoan: function (event) {
-        event.preventDefault();
-
-        var LetterOfCreditInstance;
-        var address = document.getElementById("lcAdd20").value;
-  
-
-        web3.eth.getAccounts(function (error, accounts) {
-            if (error) {
-                console.log(error);
-            }
-
-            App.contracts.LetterOfCredit.at(address).then(function (instance) {
-                LetterOfCreditInstance = instance;
-                LetterOfCreditInstance.retrieveRepaymentAmount().then(function (result) {
-                   
-                    document.getElementById("retrieveLoan").innerHTML = "Loan Amt : " + result;
-                });
-
-            }).catch(function (err) {
-                console.log(err.message);
-            });
-        });
-    },
-
-
-
     createLoan: function (event) {
         event.preventDefault();
 
         var LoanInstance;
-        var lcAdd = document.getElementById("lcAdd9").value;
         var exporterLoan = document.getElementById("exporterLoan").value;
         var loanAmt = parseInt(document.getElementById("loanAmount").value);
 
@@ -421,7 +427,7 @@ App = {
 
             App.contracts.Loan.deployed().then(function (instance) {
                 LoanInstance = instance;
-                return LoanInstance.createLoan(exporterLoan, loanAmt, lcAdd).then(function () {
+                return LoanInstance.createLoan(exporterLoan, loanAmt).then(function () {
                     LoanInstance.retrieveBiddingStatus().then(function (result) {
                         document.getElementById("biddingStatus").innerHTML = "Contract "+ LoanInstance.address+" Bidding Status: " + result;
                     });
@@ -478,8 +484,10 @@ App = {
                             LoanInstance.retrieveBiddingStatus().then(function (result3) {
                                 LoanInstance.retrieveInterestRate().then(function (result4) {
                                     document.getElementById("winningBank").innerHTML = "Winning Bank is: " + result1
-                                        + "<br>Total Amount Loan for Payment: $" + result2 + "<br>Bidding Status: " + result3 
-                                        + "<br> Interest Rate: " + result4;
+                                        result2=web3.fromWei(result2, 'ether')
+                                        result4=web3.fromWei(result4, 'ether')
+                                        + "<br> Loan Amount: " + result2 + "<br>Bidding Status: " + result3 
+                                        + "<br> Interest Amount: " + result4;
                                 });
                             });
                         });
@@ -507,6 +515,7 @@ App = {
                 LoanInstance = instance;
                 LoanInstance.retrieveExporter().then(function (result1) {
                     LoanInstance.retrieveLoanAmount().then(function (result2) {
+                        result2= web3.fromWei(result2, 'ether')
                         document.getElementById("reviewLoanDetails").innerHTML = "Issue to: " + result1
                             + "<br>Loan Amount: $" + result2;
                         
@@ -525,6 +534,7 @@ App = {
         var LoanInstance;
         var address = document.getElementById("lcAdd12").value;
         var loanAmt = document.getElementById("issuingAmt").value;
+        loanAmt = web3.toWei(loanAmt,"ether")
 
         web3.eth.getAccounts(function (error, accounts) {
             if (error) {
@@ -533,7 +543,7 @@ App = {
 
             App.contracts.Loan.at(address).then(function (instance) {
                 LoanInstance = instance;
-                LoanInstance.issueLoan({"value":loanAmt}).then(function () {  
+                LoanInstance.issueLoan({value:loanAmt}).then(function () {  
                     LoanInstance.retrieveIssue().then(function (result1) { 
                         document.getElementById("issueLoanP").innerHTML = "Loan Issued: " + result1;
                     });

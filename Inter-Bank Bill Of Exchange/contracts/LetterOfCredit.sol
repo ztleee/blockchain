@@ -229,17 +229,17 @@ contract LetterOfCredit is Ownable  {
     }
 
     function getcontractPrice() public view returns (uint value){
-        require(msg.sender==issuingBank);
+       
         return boe.contractPrice;
     }
 
     function getExporter() public view returns (address holder){
-        require(msg.sender==issuingBank);
+      
         return exporter;
     }
 
     function getImporter() public view returns (address holder){
-        require(msg.sender==issuingBank);
+   
         return importer;
     }
 
