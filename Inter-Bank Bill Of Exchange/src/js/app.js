@@ -517,7 +517,7 @@ App = {
                     LoanInstance.retrieveLoanAmount().then(function (result2) {
                         result2= web3.fromWei(result2, 'ether')
                         document.getElementById("reviewLoanDetails").innerHTML = "Issue to: " + result1
-                            + "<br>Loan Amount: $" + result2;
+                            + "<br>Loan Amount: " + result2;
                         
                     });
                 });
